@@ -1,0 +1,2 @@
+🛑 全球拦截,https://github.com/tindy2013/subconverter/raw/master/base/rules/ACL4SSR/Clash/BanAD.list
+🍃 应用净化,https://github.com/tindy2013/subconverter/raw/master/base/rules/ACL4SSR/Clash/BanProgramAD.list
