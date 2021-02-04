@@ -1,16 +1,16 @@
-custom_proxy_group=🚀 节点选择`select`[]🔯 故障转移`[]♻️ 手动选择`[]🇭🇰 香港`[]🇹🇼 台湾`[]🇺🇸 美国`[]🇯🇵 日本`[]🇸🇬 新加坡`[]🐱 专线`[]DIRECT`.*
-custom_proxy_group=🔯 故障转移`fallback`香港.*HKT`香港.*智能入口`.*香港.*x\s*0.1`http://www.gstatic.com/generate_204`300
-custom_proxy_group=♻️ 手动选择`select`香港.*HKT`香港.*x\s*0.1`香港.*智能入口.*`.*港.*x\s*1\s
-custom_proxy_group=📺 哔哩哔哩`select`[]🎯 全球直连`[]🚀 节点选择`[]🇭🇰 香港`[]🇹🇼 台湾`(广台|彰化|新北|TW|台|港|广港|香港|HK)
-custom_proxy_group=📹 YouTube`select`[]🚀 节点选择`.*
-custom_proxy_group=Ⓜ️ 微软服务`select`[]🎯 全球直连`[]🚀 节点选择`.*
-custom_proxy_group=🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`.*
-custom_proxy_group=🛑 全球拦截`select`[]REJECT`[]DIRECT`[]🚀 节点选择
-custom_proxy_group=🍃 应用净化`select`[]REJECT`[]DIRECT`[]🚀 节点选择
-custom_proxy_group=🐟 漏网之鱼`select`[]🚀 节点选择`[]🎯 全球直连`.*
-custom_proxy_group=🇭🇰 香港`select`港|香港|HK|AZ|AWS|Azure
-custom_proxy_group=🇺🇸 美国`select`美|US
-custom_proxy_group=🇯🇵 日本`select`日|日本|JP
-custom_proxy_group=🇸🇬 新加坡`select`新|新加坡|狮城|SG
-custom_proxy_group=🇹🇼 台湾`select`彰化|新北|台|Hinet|TW
-custom_proxy_group=🐱 专线`select`IPLC|专线|IEPL|iplc|iepl
+🚀 节点选择`select`[]🔯 故障转移`[]♻️ 手动选择`[]🇭🇰 香港`[]🇹🇼 台湾`[]🇺🇸 美国`[]🇯🇵 日本`[]🇸🇬 新加坡`[]🐱 专线`[]DIRECT`.*
+🔯 故障转移`fallback`香港.* HKT`香港.*智能入口`.*香港.*x\s*0.1`http://www.gstatic.com/generate_204`300
+♻️ 手动选择`select`香港.*HKT`香港.*x\s*0.1`香港.*智能入口.*`.*港.*x\s*1\s
+📺 哔哩哔哩`select`[]🎯 全球直连`[]🚀 节点选择`[]🇭🇰 香港`[]🇹🇼 台湾`(广台|彰化|新北|TW|台|港|广港|香港|HK)
+📹 YouTube`select`[]🚀 节点选择`.*
+Ⓜ️ 微软服务`select`[]🎯 全球直连`[]🚀 节点选择`.*
+🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`.*
+🛑 全球拦截`select`[]REJECT`[]DIRECT`[]🚀 节点选择
+🍃 应用净化`select`[]REJECT`[]DIRECT`[]🚀 节点选择
+🐟 漏网之鱼`select`[]🚀 节点选择`[]🎯 全球直连`.*
+🇭🇰 香港`select`港|香港|HK|AZ|AWS|Azure
+🇺🇸 美国`select`美|US
+🇯🇵 日本`select`日|日本|JP
+🇸🇬 新加坡`select`新|新加坡|狮城|SG
+🇹🇼 台湾`select`彰化|新北|台|Hinet|TW
+🐱 专线`select`IPLC|专线|IEPL|iplc|iepl
