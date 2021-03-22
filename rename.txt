@@ -1,3 +1,4 @@
+\(?((x|X)?(\d+)(\.?\d+)?)((\s?倍率?)|(x|X))\)?@x$1x
 Hong Kong@香港
 Taiwan@台湾
 United States@美国
