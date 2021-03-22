@@ -1,10 +1,10 @@
 🚀 节点选择`select`[]♻️ 实用选择`[]🇭🇰 香港`[]🇹🇼 台湾`[]🇺🇸 美国`[]🇯🇵 日本`[]🇸🇬 新加坡`[]🐱 专线`[]DIRECT`.*
 ♻️ 实用选择`select`[]🧻 自动选择`[]🔯 主机场`[]🔯 大流量`[]🔯 备用`!!GROUPID=0!!香港.*0.5`!!GROUPID=1!!香港 04`!!GROUPID=1!!美国 01`!!GROUPID=2!!V234-0.1倍`!!GROUPID=2!!IPLC-V317-0.5倍`1倍.*港
 #clash自动测试太废，包括url-test和fallback都靠不住，不稳定，尤其当前正在使用的节点，明明正常却测出超时然后给我换节点，但还得有，
-🧻 自动选择`url-test`!!GROUPID=1!!香港 0[1234].*AWS`!!GROUPID=1!!【直连】香港`台湾.*[|]`!!GROUPID=1!!狮城.*[|]`http://www.gstatic.com/generate_204`300
-🔯 主机场`select`select`!!GROUPID=0!!港`!!GROUPID=0!!台`!!GROUPID=0!!新`!!GROUPID=0!!美`!!GROUPID=0!!日`!!GROUPID=0
+🧻 自动选择`url-test`!!GROUPID=1!!香港 0[1234].*AWS`!!GROUPID=1!!【直连】香港`!!GROUPID=1!!台湾.*[|]`!!GROUPID=1!!狮城.*[|]`http://www.gstatic.com/generate_204`300
+🔯 主机场`select`select`!!GROUPID=0!!港.*0.5`!!GROUPID=0!!港`!!GROUPID=0!!台`!!GROUPID=0!!新`!!GROUPID=0!!美`!!GROUPID=0!!日`!!GROUPID=0
 🔯 大流量`select`select`!!GROUPID=1
-🔯 备用`select`select`!!GROUPID=2
+🔯 备用`select`select`!!GROUPID=2!!0.1`!!GROUPID=2!!0.5`!!GROUPID=2
 📺 哔哩哔哩`select`[]🎯 全球直连`[]🚀 节点选择`[]🇭🇰 香港`[]🇹🇼 台湾`(广台|彰化|新北|TW|台|港|广港|香港|HK)
 📹 YouTube`select`[]🚀 节点选择`.*
 🎥 奈飞视频`select`[]🚀 节点选择`(NF|奈飞|解锁|Netflix|NETFLIX|Media)`.*
