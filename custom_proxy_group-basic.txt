@@ -1,0 +1,6 @@
+🚀 节点选择`select`[]🔯 主机场`[]🔯 大流量`[]🔯 备用`[]DIRECT`.*
+🔯 主机场`select`select`!!GROUPID=0
+🔯 大流量`select`select`!!GROUPID=1
+🔯 备用`select`select`!!GROUPID=2
+🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`ddns`192.168`^[0-9]{3}$`家里`国内
+🐟 漏网之鱼`select`[]🚀 节点选择`[]🎯 全球直连
