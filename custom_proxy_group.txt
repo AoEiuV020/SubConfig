@@ -6,6 +6,7 @@
 🔯 大流量`select`select`!!GROUPID=1
 🔯 备用`select`select`!!GROUPID=2!!x0.1x`!!GROUPID=2!!x0.5x`!!GROUPID=2
 🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`国内
+💧 ipv6`select`[]DIRECT`[]🚀 节点选择`ipv6
 📺 哔哩哔哩`select`[]🎯 全球直连`[]🚀 节点选择`[]🇭🇰 香港`[]🇹🇼 台湾`(广台|彰化|新北|TW|台|港|广港|香港|HK)
 🎬 EMBY`select`[]🚀 节点选择`Emby
 📹 YouTube`select`[]🚀 节点选择`.*

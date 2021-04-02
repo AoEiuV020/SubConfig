@@ -1,2 +1,3 @@
 DIRECT,https://gist.github.com/AoEiuV020/8d9030c174b4a2fcaba134f9e053cb65/raw/direct.list
 DIRECT,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/LocalAreaNetwork.list
+💧 ipv6,https://gist.github.com/AoEiuV020/8d9030c174b4a2fcaba134f9e053cb65/raw/ipv6.list
