@@ -5,12 +5,12 @@
 🔯 主机场`select`select`!!GROUPID=0!!港.*x0.5x`!!GROUPID=0!!港`!!GROUPID=0!!台`!!GROUPID=0!!新`!!GROUPID=0!!美`!!GROUPID=0!!日`!!GROUPID=0
 🔯 大流量`select`select`!!GROUPID=1
 🔯 备用`select`select`!!GROUPID=2!!x0.1x`!!GROUPID=2!!x0.5x`!!GROUPID=2
+🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`国内
 📺 哔哩哔哩`select`[]🎯 全球直连`[]🚀 节点选择`[]🇭🇰 香港`[]🇹🇼 台湾`(广台|彰化|新北|TW|台|港|广港|香港|HK)
 🎬 EMBY`select`[]🚀 节点选择`Emby
 📹 YouTube`select`[]🚀 节点选择`.*
 🎥 奈飞视频`select`[]🚀 节点选择`(NF|奈飞|解锁|Netflix|NETFLIX|Media)`.*
 Ⓜ️ 微软服务`select`[]🎯 全球直连`[]🚀 节点选择
-🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`ddns`192.168`^[0-9]{3}$`家里`国内
 🛑 全球拦截`select`[]REJECT`[]DIRECT`[]🚀 节点选择
 🐟 漏网之鱼`select`[]🚀 节点选择`[]🎯 全球直连
 🇭🇰 香港`select`港|香港|HK|AZ|AWS|Azure
