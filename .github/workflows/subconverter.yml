@@ -57,13 +57,10 @@ jobs:
                 echo 'tg://http?server=1.2.3.4&port=233&user=user&pass=pass&remarks=Example' > $SUBSCRIBE_FILE
             fi
 
-      - name: download subconverter
+      - name: run subconverter
         run: |
             curl -s -L -O $(curl -s -L 'https://api.github.com/repos/tindy2013/subconverter/releases' | jq -r '.[0].assets[]| select(.name == "subconverter_linux64.tar.gz").browser_download_url')
             tar -zxf subconverter_linux64.tar.gz
-
-      - name: run subconverter
-        run: |
             ./subconverter/subconverter >/dev/null 2>&1 &
 
       - name: update config
@@ -126,7 +123,7 @@ jobs:
                 echo generate random token at $TOKEN_FILE
                 echo $token > $TOKEN_FILE
             fi
-            curl -v "$(cat $DEPLOY_URL_FILE)" -F "token=$token" -F "file=@config.tar.gz.aes"
+            curl -s "$(cat $DEPLOY_URL_FILE)" -F "token=$token" -F "file=@config.tar.gz.aes"
 
       - name: decrypt config
         if: ${{ env.artifact == 'true' }}
