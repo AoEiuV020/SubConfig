@@ -27,19 +27,19 @@ jobs:
             SUBSCRIBE_FILE=subscribe
             if test "x${{ secrets.upload_secret }}" != "x"
             then
-                echo ${{ secrets.upload_secret }} > $KEY_FILE
+                echo "${{ secrets.upload_secret }}" > $KEY_FILE
             fi
             if test "x${{ secrets.upload_token }}" != "x"
             then
-                echo ${{ secrets.upload_token }} > $TOKEN_FILE
+                echo "${{ secrets.upload_token }}" > $TOKEN_FILE
             fi
             if test "x${{ secrets.deploy_url }}" != "x"
             then
-                echo ${{ secrets.deploy_url }} > $DEPLOY_URL_FILE
+                echo "${{ secrets.deploy_url }}" > $DEPLOY_URL_FILE
             fi
             if test "x${{ secrets.subscribe }}" != "x"
             then
-                echo ${{ secrets.subscribe }} > $SUBSCRIBE_FILE
+                echo "${{ secrets.subscribe }}" > $SUBSCRIBE_FILE
             fi
             if test -r $KEY_FILE && test -r $TOKEN_FILE && test -r DEPLOY_URL_FILE && test -r $SUBSCRIBE_FILE
             then
