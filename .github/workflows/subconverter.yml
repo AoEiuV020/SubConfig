@@ -8,6 +8,8 @@ on:
     branches: [ main ]
   schedule:
     - cron:  '0 */2 * * *'
+  watch:
+    types: [started]
   workflow_dispatch:
 
 jobs:

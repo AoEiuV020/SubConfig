@@ -5,7 +5,8 @@ subconverter外部配置以及利用actions自动更新订阅转换
 [.github/workflows/subconverter.yml](.github/workflows/subconverter.yml)
 
 ## Getting Started
-fork后配置secrets  
+fork后点击右上角的 Star 星星按钮即可试用，  
+需要使用发布功能的话需要配置几个secrets  
 - SUBSCRIBE 订阅链接，一行一个订阅，支持tg格式的http代理socks5代理，
   ```
   tg://http?server=1.2.3.4&port=233&user=user&pass=pass&remarks=Example
