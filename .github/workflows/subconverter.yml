@@ -78,9 +78,9 @@ jobs:
             url=$(cat subscribe.json |jq -r 'to_entries|map(if (.value|(contains("tg://") or contains("https://t.me/"))|not) then (.key|tostring|"sub/"+.) else .value end)|join("|")|@uri')
             echo 拼接自己需要的配置请求，
             mkdir -p config
-            for suffix in "" "-basic" "-ban" "-noban"
+            for suffix in "" #"-basic" "-ban" "-noban"
             do
-                for target in "clash" "quan"
+                for target in "clash" #"quan"
                 do
                     config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
                     curl -s -L -o config/$target$suffix "http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params"
