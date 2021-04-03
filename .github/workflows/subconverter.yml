@@ -67,7 +67,7 @@ jobs:
       - name: update config
         run: |
             SUBSCRIBE_FILE=subscribe
-            default_config="https://github.com/$GITHUB_REPOSITORY/blob/main/subconverter.ini"
+            default_config="https://github.com/$GITHUB_REPOSITORY/raw/main/subconverter.ini"
             params="emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true"
             mkdir -p subconverter/sub
             echo 先整理出订阅数组，
@@ -82,7 +82,7 @@ jobs:
             do
                 for target in "clash" "quan"
                 do
-                    config=$(echo ${default_config/?.ini/${suffix}.ini} |jq -rR @uri)
+                    config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
                     curl -s -L -o config/$target$suffix "http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params"
                 done
             done
