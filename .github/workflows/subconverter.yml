@@ -17,7 +17,7 @@ jobs:
 
       - name: install dependencies
         run: |
-            sudo apt install -y jq curl tar gzip openssl
+            sudo apt install -y jq curl tar gzip openssl unzip
 
       - name: prepare
         run: |
@@ -63,10 +63,33 @@ jobs:
             tar -zxf subconverter_linux64.tar.gz
             ./subconverter/subconverter >/dev/null 2>&1 &
 
+      - name: cache external config
+        run: |
+            branch=${GITHUB_REF#refs/heads/}
+            repository=${GITHUB_REPOSITORY#*/}
+            echo 下载当前项目，只需要最新一个版本代码，所以不需要clone，
+            curl -s -L -o "$repository.zip" "https://github.com/$GITHUB_REPOSITORY/archive/refs/heads/$branch.zip"
+            unzip -q $repository.zip
+            mv "$repository-$branch" subconverter/_SubConfig
+            echo 下载ACL4SSR，用的比较多的一个规则仓库，
+            curl -s -L -o "ACL4SSR.zip" "https://github.com/ACL4SSR/ACL4SSR/archive/refs/heads/master.zip"
+            unzip -q ACL4SSR.zip
+            mv "ACL4SSR-master" subconverter/_ACL4SSR
+            echo 替换配置文件, 包含以上仓库的地址，改成本地地址以加速，
+            function replace_url() {
+                from=$1
+                to=$2
+                from=$(echo $from|sed 's/\//\\\//g')
+                sed -i "s/$from/$to/g" subconverter/_SubConfig/*
+            }
+            replace_url "https://github.com/$GITHUB_REPOSITORY/raw/$branch" _SubConfig
+            replace_url "https://github.com/ACL4SSR/ACL4SSR/raw/master" _ACL4SSR
+
+
       - name: update config
         run: |
             SUBSCRIBE_FILE=subscribe
-            default_config="https://github.com/$GITHUB_REPOSITORY/raw/main/subconverter.ini"
+            default_config="_SubConfig/subconverter.ini"
             params="emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true"
             mkdir -p subconverter/sub
             echo 先整理出订阅数组，
