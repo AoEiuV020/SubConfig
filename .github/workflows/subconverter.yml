@@ -41,9 +41,13 @@ jobs:
             then
                 echo ${{ secrets.subscribe }} > $SUBSCRIBE_FILE
             fi
-            if test -r $KEY_FILE && test -r $TOKEN_FILE && test -r DEPLOY_URL_FILE
+            if test -r $KEY_FILE && test -r $TOKEN_FILE && test -r DEPLOY_URL_FILE && test -r $SUBSCRIBE_FILE
             then
                 echo deploy='true' >> $GITHUB_ENV
+            fi
+            if test ! -r $SUBSCRIBE_FILE
+            then
+                echo artifact='true' >> $GITHUB_ENV
             fi
             if test ! -r $SUBSCRIBE_FILE
             then
@@ -121,3 +125,21 @@ jobs:
                 echo $token > $TOKEN_FILE
             fi
             curl -v "$(cat $DEPLOY_URL_FILE)" -F "token=$token" -F "file=@config.tar.gz.aes"
+
+      - name: decrypt config
+        if: ${{ env.artifact == 'true' }}
+        run: |
+            KEY_FILE=upload_secret
+            key=$(cat $KEY_FILE)
+            iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
+            openssl enc -d -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz.aes >config-decrypt.tar.gz
+            mkdir -p config-decrypt
+            tar -zxf config-decrypt.tar.gz -C config-decrypt
+
+      - name: upload config
+        if: ${{ env.artifact == 'true' }}
+        uses: actions/upload-artifact@master
+        with:
+          name: config
+          path: config-decrypt/*
+
