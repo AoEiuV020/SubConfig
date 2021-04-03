@@ -84,7 +84,7 @@ jobs:
                 from=$1
                 to=$2
                 from=$(echo $from|sed 's/\//\\\//g')
-                sed -i "s/$from/$to/g" subconverter/_SubConfig/*
+                sed -i "s/$from/$to/g" subconverter/_SubConfig/*.*
             }
             replace_url "https://github.com/$GITHUB_REPOSITORY/raw/$branch" _SubConfig
             replace_url "https://github.com/ACL4SSR/ACL4SSR/raw/master" _ACL4SSR
