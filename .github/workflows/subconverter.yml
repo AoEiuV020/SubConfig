@@ -59,8 +59,12 @@ jobs:
 
       - name: run subconverter
         run: |
+            echo 下载subconverter,
             curl -s -L -O $(curl -s -L 'https://api.github.com/repos/tindy2013/subconverter/releases' | jq -r '.[0].assets[]| select(.name == "subconverter_linux64.tar.gz").browser_download_url')
             tar -zxf subconverter_linux64.tar.gz
+            echo 更改base_path以便支持缓存base配置文件，
+            sed -i 's/^base_path=.*/base_path=_SubConfig/' subconverter/pref.ini
+            echo 运行subconverter
             ./subconverter/subconverter >/dev/null 2>&1 &
 
       - name: cache external config
