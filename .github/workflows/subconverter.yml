@@ -41,7 +41,7 @@ jobs:
             then
                 echo "${{ secrets.subscribe }}" > $SUBSCRIBE_FILE
             fi
-            if test -r $KEY_FILE && test -r $TOKEN_FILE && test -r DEPLOY_URL_FILE && test -r $SUBSCRIBE_FILE
+            if test -r $KEY_FILE && test -r $TOKEN_FILE && test -r $DEPLOY_URL_FILE && test -r $SUBSCRIBE_FILE
             then
                 echo 发布到指定地址，
                 echo deploy='true' >> $GITHUB_ENV
