@@ -4,3 +4,4 @@
 🔯 备用`select`select`!!GROUPID=2
 🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`国内
 🐟 漏网之鱼`select`[]🚀 节点选择`[]🎯 全球直连
+💧 ipv6`select`[]DIRECT`[]🚀 节点选择`ipv6
