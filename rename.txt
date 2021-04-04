@@ -1,7 +1,6 @@
 \(?((x|X)?(\d+)(\.?\d+)?)((\s?倍率?)|(x|X))\)?@x$1x
 !!GROUPID=0!!^@A·
 !!GROUPID=1!!^@B·
-!!GROUPID=2!!^@C·
 Hong Kong@香港
 Taiwan@台湾
 United States@美国
