@@ -1,8 +1,9 @@
 <?php
 # https://host/sub?url=<secret>
 # https://host/sub?target=quan&url=<secret>-basic
+$sub = "https://subc.020.name/sub?";
 #$sub = "https://sub.prpr.xyz/sub?";
-$sub = "https://sub.maoxiongnet.com/sub?";
+#$sub = "https://sub.maoxiongnet.com/sub?";
 #$sub = "https://pub-api-1.bianyuan.xyz/sub?";
 #$sub = "https://sub.id9.cc/sub?";
 $params = $_SERVER['QUERY_STRING'];
