@@ -1,5 +1,5 @@
 🚀 节点选择`select`[]♻️ 实用选择`[]🇭🇰 香港`[]🇹🇼 台湾`[]🇺🇸 美国`[]🇯🇵 日本`[]🇸🇬 新加坡`[]🐱 专线`[]DIRECT`.*
-♻️ 实用选择`select`[]🔯 主机场`[]🔯 备用`!!GROUPID=0!!香港 0[45]`!!GROUPID=1!!V234-x0.1x`!!GROUPID=1!!V317-x0.5x`!!GROUPID=1!!V103-x1x`!!GROUPID=1!!V302-x1.5x
+♻️ 实用选择`select`[]🔯 主机场`[]🔯 备用`!!GROUPID=0!!香港 0[34]`!!GROUPID=1!!V234-x0.1x`!!GROUPID=1!!V317-x0.5x`!!GROUPID=1!!V103-x1x`!!GROUPID=1!!V302-x1.5x
 🔯 主机场`select`select`!!GROUPID=0!!港.*x0.5x`!!GROUPID=0!!港`!!GROUPID=0!!台`!!GROUPID=0!!新`!!GROUPID=0!!美`!!GROUPID=0!!日`!!GROUPID=0
 🔯 备用`select`select`!!GROUPID=1!!x0.1x`!!GROUPID=1!!x0.5x`!!GROUPID=1
 🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`国内
