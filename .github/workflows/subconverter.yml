@@ -1,5 +1,7 @@
 
 name: CI
+env:
+    TZ: Asia/Shanghai
 
 on:
   push:
