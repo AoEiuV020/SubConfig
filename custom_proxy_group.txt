@@ -5,6 +5,7 @@
 🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`国内
 💧 ipv6`select`[]DIRECT`[]🚀 节点选择`ipv6
 📺 哔哩哔哩`select`[]🎯 全球直连`[]🚀 节点选择`[]🇭🇰 香港`[]🇹🇼 台湾`(广台|彰化|新北|TW|台|港|广港|香港|HK)
+🎬 巴哈姆特`select`[]🎯 全球直连`[]🚀 节点选择`[]🇹🇼 台湾`(广台|彰化|新北|TW|台)
 🎬 EMBY`select`[]🚀 节点选择`Emby`emby
 📹 YouTube`select`[]🚀 节点选择`.*
 🎥 奈飞视频`select`[]🚀 节点选择`(NF|奈飞|解锁|Netflix|NETFLIX|Media)`.*
