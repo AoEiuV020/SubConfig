@@ -2,3 +2,4 @@ DIRECT,https://github.com/AoEiuV020/SubConfig/raw/main/direct.list
 DIRECT,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/LocalAreaNetwork.list
 💧 ipv6,https://github.com/AoEiuV020/SubConfig/raw/main/ipv6.list
 🚀 节点选择,https://github.com/AoEiuV020/SubConfig/raw/main/proxy.list
+🔨 破除封禁,https://github.com/AoEiuV020/SubConfig/raw/main/break.list
