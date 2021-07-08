@@ -2,5 +2,6 @@
 🔯 主机场`select`select`!!GROUPID=0!!港.*x0.5x`!!GROUPID=0!!港`!!GROUPID=0!!台`!!GROUPID=0!!新`!!GROUPID=0!!美`!!GROUPID=0!!日`!!GROUPID=0
 🔯 备用`select`select`!!GROUPID=2
 🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`国内
+🔨 破除封禁`select`[]🎯 全球直连`[]🚀 节点选择`国内
 💧 ipv6`select`[]DIRECT`[]🚀 节点选择`ipv6
 🐟 漏网之鱼`select`[]🚀 节点选择`[]🎯 全球直连
