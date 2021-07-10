@@ -1,27 +1,9 @@
 
-name: CI
+name: debugger
 env:
     TZ: Asia/Shanghai
 
 on:
-  push:
-    tags:
-      - '*'
-    branches:
-      - main
-    paths-ignore:
-      - '.github/workflows/*'
-      - '!.github/workflows/subconverter.yml'
-  pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - '.github/workflows/*'
-      - '!.github/workflows/subconverter.yml'
-  schedule:
-    - cron:  '0 */2 * * *'
-  watch:
-    types: [started]
   workflow_dispatch:
 
 jobs:
@@ -124,70 +106,12 @@ jobs:
                 for target in "clash" "quan" "v2ray"
                 do
                     config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
-                    code=$(curl -s -L -o config/$target$suffix -w '%{http_code}' "http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params")
-                    if test "x$code" != "x200"
-                    then
-                        echo 订阅转换异常，
-                        wc config/$target$suffix
-                        cat config/$target$suffix
-                        exit 1
-                    fi
+                    echo "curl -s -L -o config/$target$suffix -w '%{http_code}' \"http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params\"" >> update.sh
                 done
             done
+            chmod +x update.sh
 
-      - name: compress config
-        run: |
-            KEY_FILE=upload_secret
-            echo 打包压缩所有生成的配置文件，
-            cd config
-            tar -zcf ../config.tar.gz *
-            cd ..
-            echo 加密压缩包，
-            # iv和key都是base64字符串，shell变量不能保存二进制数据，会破坏掉0,
-            #iv=$(head -c 16 /dev/urandom)
-            iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
-            #head -c 32 /dev/urandom |base64 > upload_secret
-            if test -r $KEY_FILE
-            then
-                key=$(cat $KEY_FILE)
-            else
-                key=$(head -c 32 /dev/urandom |base64)
-                echo generate random secret at $KEY_FILE
-                echo $key > $KEY_FILE
-            fi
-            openssl enc -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz >config.tar.gz.aes
-
-      - name: deploy config
-        if: ${{ env.deploy == 'true' }}
-        run: |
-            TOKEN_FILE=upload_token
-            DEPLOY_URL_FILE=deploy_url
-            echo 发布配置文件压缩包，
-            #head -c 32 /dev/urandom |od -A n -v -t x1 | tr -d ' \n' > upload_token
-            if test -r $TOKEN_FILE
-            then
-                token=$(cat $TOKEN_FILE)
-            else
-                token=$(head -c 32 /dev/urandom |od -A n -v -t x1 | tr -d ' \n')
-                echo generate random token at $TOKEN_FILE
-                echo $token > $TOKEN_FILE
-            fi
-            curl -s "$(cat $DEPLOY_URL_FILE)" -F "token=$token" -F "file=@config.tar.gz.aes"
-
-      - name: decrypt config
-        if: ${{ env.artifact == 'true' }}
-        run: |
-            KEY_FILE=upload_secret
-            key=$(cat $KEY_FILE)
-            iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
-            openssl enc -d -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz.aes >config-decrypt.tar.gz
-            mkdir -p config-decrypt
-            tar -zxf config-decrypt.tar.gz -C config-decrypt
-
-      - name: upload config
-        if: ${{ env.artifact == 'true' }}
-        uses: actions/upload-artifact@master
-        with:
-          name: config
-          path: config-decrypt/*
-
+      - name: Setup Debug Session
+        env:   
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: csexton/debugger-action@master
