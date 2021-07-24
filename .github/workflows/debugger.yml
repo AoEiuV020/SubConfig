@@ -96,7 +96,7 @@ jobs:
             echo 先整理出订阅数组，
             cat subscribe |jq -srR 'split("\n")|map(select(length > 0))' > subscribe.json
             echo 再生成clash格式的节点列表，方便后面复用避免重复请求机场订阅，
-            cat subscribe.json |jq -r 'map(select(contains("tg")|not))' |jq -r 'to_entries[]|"curl -s -L -o subconverter/sub/"+(.key|tostring)+" "+("http://127.0.0.1:25500/sub?target=clash&config="+("_SubConfig/exclude.ini"|@uri)+"&list=true&url="+(.value|@uri)|@sh)' |sh
+            cat subscribe.json |jq -r 'map(select(contains("tg")|not))' |jq -r 'to_entries[]|"curl -s -L -o subconverter/sub/"+(.key|tostring)+" "+("http://127.0.0.1:25500/sub?target=clash&config="+("_SubConfig/exclude.ini"|@uri)+"&list=true&url="+(.value)|@sh)' |sh
             echo 两种tg写法支持http代理和socks5代理，不支持从clash节点列表中获取，所以要保留tg写法，
             url=$(cat subscribe.json |jq -r 'to_entries|map(if (.value|(contains("tg://") or contains("https://t.me/"))|not) then (.key|tostring|"sub/"+.) else .value end)|join("|")|@uri')
             echo 拼接自己需要的配置请求，
