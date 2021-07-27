@@ -103,7 +103,7 @@ jobs:
             mkdir -p config
             for suffix in "" "-basic" "-ban" "-noban"
             do
-                for target in "clash" "quan" "v2ray"
+                for target in "clash" "quan" "v2ray" "ssr"
                 do
                     config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
                     echo "curl -s -L -o config/$target$suffix -w '%{http_code}' \"http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params\"" >> update.sh
