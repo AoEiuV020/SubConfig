@@ -82,14 +82,14 @@ jobs:
             echo 运行subconverter
             ./subconverter/subconverter >/dev/null 2>&1 &
 
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: subconverter/_SubConfig
+
       - name: cache external config
         run: |
             branch=${GITHUB_REF#refs/heads/}
-            repository=${GITHUB_REPOSITORY#*/}
-            echo 下载当前项目，只需要最新一个版本代码，所以不需要clone，
-            curl -s -L -o "$repository.zip" "https://github.com/$GITHUB_REPOSITORY/archive/refs/heads/$branch.zip"
-            unzip -q $repository.zip
-            mv "$repository-$branch" subconverter/_SubConfig
             echo 下载ACL4SSR，用的比较多的一个规则仓库，
             curl -s -L -o "ACL4SSR.zip" "https://github.com/ACL4SSR/ACL4SSR/archive/refs/heads/master.zip"
             unzip -q ACL4SSR.zip
