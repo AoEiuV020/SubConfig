@@ -17,7 +17,7 @@ allow-lan: false
 # #192.168.122.11: 绑定单个IPv4地址
 # #"[aaaa::a8aa:ff:fe09:57d8]": 绑定单个IPv6地址
 bind-address: "*"
-ipv6: true
+ipv6: false
 
 # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
 mode: rule
