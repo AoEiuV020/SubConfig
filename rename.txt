@@ -1,7 +1,8 @@
 \(?((x|X)?(\d+)(\.?\d+)?)((\s?倍率?)|(x|X))\)?@x$1x
-!!GROUPID=0!!\*$@ NF 
-!!GROUPID=0!!\*\+$@ NF+ 
-!!GROUPID=2!!\*$@ NF 
+!!GROUPID=0!!\*@ 原生
+!!GROUPID=0!!\^@ 解锁NF
+!!GROUPID=0!!\!@ UDP
+!!GROUPID=0!!\+@ EMBY
 !!GROUPID=0!!^@A·
 !!GROUPID=1!!^@B·
 !!GROUPID=2!!^@C·
