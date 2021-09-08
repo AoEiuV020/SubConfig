@@ -1,11 +1,15 @@
 \(?((x|X)?(\d+)(\.?\d+)?)((\s?倍率?)|(x|X))\)?@x$1x
-!!GROUPID=0!!\*@ 原生
-!!GROUPID=0!!\^@ 解锁NF
-!!GROUPID=0!!\!@ UDP
-!!GROUPID=0!!\+@ EMBY
+\*@ 原生
+\^@ 解锁NF
+\!@ UDP
+\+@ EMBY
 !!GROUPID=0!!^@A·
 !!GROUPID=1!!^@B·
 !!GROUPID=2!!^@C·
+HKG@香港
+TPE@台湾
+SGP@新加坡
+JPN@日本
 Hong Kong@香港
 Taiwan@台湾
 United States@美国
