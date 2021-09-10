@@ -119,7 +119,7 @@ jobs:
             url=$(cat subscribe.json |jq -r 'to_entries|map(if (.value|(startswith("http")and(startswith("https://t.me/")|not))) then (.key|tostring|"sub/"+.) else .value end)|join("|")|@uri')
             echo 拼接自己需要的配置请求，
             mkdir -p config
-            for suffix in "" "-basic" "-ban" "-noban"
+            for suffix in "" "-basic" "-ban" "-noban" "-break"
             do
                 for target in "clash" "quan" "v2ray" "ssr"
                 do
