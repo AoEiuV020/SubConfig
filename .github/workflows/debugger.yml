@@ -65,6 +65,8 @@ jobs:
             mv pref.example.toml pref.toml
             mv pref.example.yml pref.yml
             sed -i 's/^base_path=.*/base_path=_SubConfig/' pref.ini
+            sed -i 's/^base_path = ".*"/base_path = "_SubConfig"/' pref.toml
+            sed -i 's/base_path: .*/base_path: _SubConfig/' pref.yml
             echo 运行subconverter
             ./subconverter >/dev/null 2>&1 &
 
