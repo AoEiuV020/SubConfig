@@ -1,25 +1,24 @@
-
 name: CI
 env:
-    TZ: Asia/Shanghai
+  TZ: Asia/Shanghai
 
 on:
   push:
     tags:
-      - '*'
+      - "*"
     branches:
       - main
     paths-ignore:
-      - '.github/workflows/*'
-      - '!.github/workflows/subconverter.yml'
+      - ".github/workflows/*"
+      - "!.github/workflows/subconverter.yml"
   pull_request:
     branches:
       - main
     paths-ignore:
-      - '.github/workflows/*'
-      - '!.github/workflows/subconverter.yml'
+      - ".github/workflows/*"
+      - "!.github/workflows/subconverter.yml"
   schedule:
-    - cron:  '0 */2 * * *'
+    - cron: "0 */2 * * *"
   watch:
     types: [started]
   workflow_dispatch:
@@ -29,64 +28,63 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: install dependencies
         run: |
-            sudo apt install -y jq curl tar gzip openssl unzip
+          sudo apt install -y jq curl tar gzip openssl unzip
 
       - name: prepare
         run: |
-            KEY_FILE=upload_secret
-            TOKEN_FILE=upload_token
-            DEPLOY_URL_FILE=deploy_url
-            SUBSCRIBE_FILE=subscribe
-            if test "x${{ secrets.upload_secret }}" != "x"
-            then
-                echo "${{ secrets.upload_secret }}" > $KEY_FILE
-            fi
-            if test "x${{ secrets.upload_token }}" != "x"
-            then
-                echo "${{ secrets.upload_token }}" > $TOKEN_FILE
-            fi
-            if test "x${{ secrets.deploy_url }}" != "x"
-            then
-                echo "${{ secrets.deploy_url }}" > $DEPLOY_URL_FILE
-            fi
-            if test "x${{ secrets.subscribe }}" != "x"
-            then
-                echo "${{ secrets.subscribe }}" > $SUBSCRIBE_FILE
-            fi
-            if test -r $KEY_FILE && test -r $TOKEN_FILE && test -r $DEPLOY_URL_FILE && test -r $SUBSCRIBE_FILE
-            then
-                echo 发布到指定地址，
-                echo deploy='true' >> $GITHUB_ENV
-            fi
-            if test ! -r $SUBSCRIBE_FILE
-            then
-                echo 上传到artifact,
-                echo artifact='true' >> $GITHUB_ENV
-            fi
-            if test ! -r $SUBSCRIBE_FILE
-            then
-                echo 没有节点，生成一个示例，
-                echo 'tg://http?server=1.2.3.4&port=233&user=user&pass=pass&remarks=Example' > $SUBSCRIBE_FILE
-            fi
+          KEY_FILE=upload_secret
+          TOKEN_FILE=upload_token
+          DEPLOY_URL_FILE=deploy_url
+          SUBSCRIBE_FILE=subscribe
+          if test "x${{ secrets.upload_secret }}" != "x"
+          then
+              echo "${{ secrets.upload_secret }}" > $KEY_FILE
+          fi
+          if test "x${{ secrets.upload_token }}" != "x"
+          then
+              echo "${{ secrets.upload_token }}" > $TOKEN_FILE
+          fi
+          if test "x${{ secrets.deploy_url }}" != "x"
+          then
+              echo "${{ secrets.deploy_url }}" > $DEPLOY_URL_FILE
+          fi
+          if test "x${{ secrets.subscribe }}" != "x"
+          then
+              echo "${{ secrets.subscribe }}" > $SUBSCRIBE_FILE
+          fi
+          if test -r $KEY_FILE && test -r $TOKEN_FILE && test -r $DEPLOY_URL_FILE && test -r $SUBSCRIBE_FILE
+          then
+              echo 发布到指定地址，
+              echo deploy='true' >> $GITHUB_ENV
+          fi
+          if test ! -r $SUBSCRIBE_FILE
+          then
+              echo 上传到artifact,
+              echo artifact='true' >> $GITHUB_ENV
+          fi
+          if test ! -r $SUBSCRIBE_FILE
+          then
+              echo 没有节点，生成一个示例，
+              echo 'tg://http?server=1.2.3.4&port=233&user=user&pass=pass&remarks=Example' > $SUBSCRIBE_FILE
+          fi
 
       - name: run subconverter
         run: |
-            echo 下载subconverter,
-            curl -s -L -O $(curl -s -L 'https://api.github.com/repos/tindy2013/subconverter/releases' | jq -r '.[0].assets[]| select(.name == "subconverter_linux64.tar.gz").browser_download_url')
-            tar -zxf subconverter_linux64.tar.gz
-            cd subconverter
-            echo 更改base_path以便支持缓存base配置文件，
-            mv pref.example.ini pref.ini
-            mv pref.example.toml pref.toml
-            mv pref.example.yml pref.yml
-            sed -i 's/^base_path=.*/base_path=_SubConfig/' pref.ini
-            sed -i 's/^base_path = ".*"/base_path = "_SubConfig"/' pref.toml
-            sed -i 's/base_path: .*/base_path: _SubConfig/' pref.yml
-            echo 运行subconverter
-            ./subconverter >/dev/null 2>&1 &
+          echo 下载subconverter,
+          curl -s -L -O $(curl -s -L 'https://api.github.com/repos/tindy2013/subconverter/releases' | jq -r '.[0].assets[]| select(.name == "subconverter_linux64.tar.gz").browser_download_url')
+          tar -zxf subconverter_linux64.tar.gz
+          cd subconverter
+          echo 更改base_path以便支持缓存base配置文件，
+          mv pref.example.ini pref.ini
+          mv pref.example.toml pref.toml
+          mv pref.example.yml pref.yml
+          sed -i 's/^base_path=.*/base_path=_SubConfig/' pref.ini
+          sed -i 's/^base_path = ".*"/base_path = "_SubConfig"/' pref.toml
+          sed -i 's/base_path: .*/base_path: _SubConfig/' pref.yml
+          echo 运行subconverter
+          ./subconverter >/dev/null 2>&1 &
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -95,100 +93,99 @@ jobs:
 
       - name: cache external config
         run: |
-            branch=${GITHUB_REF#refs/heads/}
-            echo 下载ACL4SSR，用的比较多的一个规则仓库，
-            curl -s -L -o "ACL4SSR.zip" "https://github.com/ACL4SSR/ACL4SSR/archive/refs/heads/master.zip"
-            unzip -q ACL4SSR.zip
-            mv "ACL4SSR-master" subconverter/_ACL4SSR
-            echo 替换配置文件, 包含以上仓库的地址，改成本地地址以加速，
-            function replace_url() {
-                from=$1
-                to=$2
-                from=$(echo $from|sed 's/\//\\\//g')
-                sed -i "s/$from/$to/g" subconverter/_SubConfig/*.*
-            }
-            replace_url "https://github.com/$GITHUB_REPOSITORY/raw/$branch" _SubConfig
-            replace_url "https://github.com/ACL4SSR/ACL4SSR/raw/master" _ACL4SSR
-
+          branch=${GITHUB_REF#refs/heads/}
+          echo 下载ACL4SSR，用的比较多的一个规则仓库，
+          curl -s -L -o "ACL4SSR.zip" "https://github.com/ACL4SSR/ACL4SSR/archive/refs/heads/master.zip"
+          unzip -q ACL4SSR.zip
+          mv "ACL4SSR-master" subconverter/_ACL4SSR
+          echo 替换配置文件, 包含以上仓库的地址，改成本地地址以加速，
+          function replace_url() {
+              from=$1
+              to=$2
+              from=$(echo $from|sed 's/\//\\\//g')
+              sed -i "s/$from/$to/g" subconverter/_SubConfig/*.*
+          }
+          replace_url "https://github.com/$GITHUB_REPOSITORY/raw/$branch" _SubConfig
+          replace_url "https://github.com/ACL4SSR/ACL4SSR/raw/master" _ACL4SSR
 
       - name: update config
         run: |
-            SUBSCRIBE_FILE=subscribe
-            default_config="_SubConfig/subconverter.ini"
-            params="emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true"
-            mkdir -p subconverter/sub
-            echo 先整理出订阅数组，
-            cat subscribe |jq -srR 'split("\n")|map(select(length > 0))' > subscribe.json
-            echo 再下载节点列表，方便后面复用避免重复请求机场订阅，
-            cat subscribe.json |jq -r 'map(select(startswith("http")and(startswith("https://t.me/")|not)))' |jq -r 'to_entries[]|"curl -s -L -o subconverter/sub/"+(.key|tostring)+" "+(.value|@sh)' |sh
-            echo 订阅转成本地请求，其他链接保留，
-            url=$(cat subscribe.json |jq -r 'to_entries|map(if (.value|(startswith("http")and(startswith("https://t.me/")|not))) then (.key|tostring|"sub/"+.) else .value end)|join("|")|@uri')
-            echo 拼接自己需要的配置请求，
-            mkdir -p config
-            for suffix in "" "-basic" "-break"
-            do
-                for target in "clash" "quan" "v2ray" "ssr"
-                do
-                    config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
-                    code=$(curl -s -L -o config/$target$suffix -w '%{http_code}' "http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params")
-                    if test "x$code" != "x200"
-                    then
-                        echo 订阅转换异常，
-                        wc config/$target$suffix
-                        cat config/$target$suffix
-                        exit 1
-                    fi
-                done
-            done
+          SUBSCRIBE_FILE=subscribe
+          default_config="_SubConfig/subconverter.ini"
+          params="emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true"
+          mkdir -p subconverter/sub
+          echo 先整理出订阅数组，
+          cat subscribe |jq -srR 'split("\n")|map(select(length > 0))' > subscribe.json
+          echo 再下载节点列表，方便后面复用避免重复请求机场订阅，
+          cat subscribe.json |jq -r 'map(select(startswith("http")and(startswith("https://t.me/")|not)))' |jq -r 'to_entries[]|"curl -s -L -o subconverter/sub/"+(.key|tostring)+" "+(.value|@sh)' |sh
+          echo 订阅转成本地请求，其他链接保留，
+          url=$(cat subscribe.json |jq -r 'to_entries|map(if (.value|(startswith("http")and(startswith("https://t.me/")|not))) then (.key|tostring|"sub/"+.) else .value end)|join("|")|@uri')
+          echo 拼接自己需要的配置请求，
+          mkdir -p config
+          for suffix in "" "-basic" "-break"
+          do
+              for target in "clash" "quan" "v2ray" "ssr"
+              do
+                  config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
+                  code=$(curl -s -L -o config/$target$suffix -w '%{http_code}' "http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params")
+                  if test "x$code" != "x200"
+                  then
+                      echo 订阅转换异常，
+                      wc config/$target$suffix
+                      cat config/$target$suffix
+                      exit 1
+                  fi
+              done
+          done
 
       - name: compress config
         run: |
-            KEY_FILE=upload_secret
-            echo 打包压缩所有生成的配置文件，
-            cd config
-            tar -zcf ../config.tar.gz *
-            cd ..
-            echo 加密压缩包，
-            # iv和key都是base64字符串，shell变量不能保存二进制数据，会破坏掉0,
-            #iv=$(head -c 16 /dev/urandom)
-            iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
-            #head -c 32 /dev/urandom |base64 > upload_secret
-            if test -r $KEY_FILE
-            then
-                key=$(cat $KEY_FILE)
-            else
-                key=$(head -c 32 /dev/urandom |base64)
-                echo generate random secret at $KEY_FILE
-                echo $key > $KEY_FILE
-            fi
-            openssl enc -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz >config.tar.gz.aes
+          KEY_FILE=upload_secret
+          echo 打包压缩所有生成的配置文件，
+          cd config
+          tar -zcf ../config.tar.gz *
+          cd ..
+          echo 加密压缩包，
+          # iv和key都是base64字符串，shell变量不能保存二进制数据，会破坏掉0,
+          #iv=$(head -c 16 /dev/urandom)
+          iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
+          #head -c 32 /dev/urandom |base64 > upload_secret
+          if test -r $KEY_FILE
+          then
+              key=$(cat $KEY_FILE)
+          else
+              key=$(head -c 32 /dev/urandom |base64)
+              echo generate random secret at $KEY_FILE
+              echo $key > $KEY_FILE
+          fi
+          openssl enc -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz >config.tar.gz.aes
 
       - name: deploy config
         if: ${{ env.deploy == 'true' }}
         run: |
-            TOKEN_FILE=upload_token
-            DEPLOY_URL_FILE=deploy_url
-            echo 发布配置文件压缩包，
-            #head -c 32 /dev/urandom |od -A n -v -t x1 | tr -d ' \n' > upload_token
-            if test -r $TOKEN_FILE
-            then
-                token=$(cat $TOKEN_FILE)
-            else
-                token=$(head -c 32 /dev/urandom |od -A n -v -t x1 | tr -d ' \n')
-                echo generate random token at $TOKEN_FILE
-                echo $token > $TOKEN_FILE
-            fi
-            curl -s "$(cat $DEPLOY_URL_FILE)" -F "token=$token" -F "file=@config.tar.gz.aes"
+          TOKEN_FILE=upload_token
+          DEPLOY_URL_FILE=deploy_url
+          echo 发布配置文件压缩包，
+          #head -c 32 /dev/urandom |od -A n -v -t x1 | tr -d ' \n' > upload_token
+          if test -r $TOKEN_FILE
+          then
+              token=$(cat $TOKEN_FILE)
+          else
+              token=$(head -c 32 /dev/urandom |od -A n -v -t x1 | tr -d ' \n')
+              echo generate random token at $TOKEN_FILE
+              echo $token > $TOKEN_FILE
+          fi
+          curl -s "$(cat $DEPLOY_URL_FILE)" -F "token=$token" -F "file=@config.tar.gz.aes"
 
       - name: decrypt config
         if: ${{ env.artifact == 'true' }}
         run: |
-            KEY_FILE=upload_secret
-            key=$(cat $KEY_FILE)
-            iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
-            openssl enc -d -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz.aes >config-decrypt.tar.gz
-            mkdir -p config-decrypt
-            tar -zxf config-decrypt.tar.gz -C config-decrypt
+          KEY_FILE=upload_secret
+          key=$(cat $KEY_FILE)
+          iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
+          openssl enc -d -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz.aes >config-decrypt.tar.gz
+          mkdir -p config-decrypt
+          tar -zxf config-decrypt.tar.gz -C config-decrypt
 
       - name: upload config
         if: ${{ env.artifact == 'true' }}
@@ -196,4 +193,3 @@ jobs:
         with:
           name: config
           path: config-decrypt/*
-
