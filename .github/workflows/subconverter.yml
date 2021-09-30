@@ -128,7 +128,7 @@ jobs:
               do
                   config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
                   code=$(curl -s -L -o config/$target$suffix -w '%{http_code}' "http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params")
-                  if test "x$code" != "x200"
+                  if [[ "$code" != 200 && -s config/$target$suffix ]]
                   then
                       echo 订阅转换异常，
                       wc config/$target$suffix
