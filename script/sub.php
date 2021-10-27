@@ -9,7 +9,7 @@ $sub = "https://subc.020.name/sub?";
 $params = $_SERVER['QUERY_STRING'];
 $config = "https://github.com/AoEiuV020/SubConfig/raw/main/subconverter.ini";
 $target = 'clash';
-$example_params = "emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true";
+$example_params = "emoji=true&list=false&udp=true&tfo=false&scv=false&fdn=false&sort=false&new_name=true";
 $key = trim(file_get_contents('sub_secret'));
 parse_str($params, $get_array);
 $url = $get_array['url'];

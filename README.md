@@ -51,7 +51,7 @@ fork后点击右上角的 Star 星星按钮即可试用，
 - 参数传递cache=false或者服务器上没有缓存就会使用外部订阅转换后端获取到配置并缓存起来，
   这个过程会注入当前目录下的subscribe中的订阅链接，并忽略其他参数，直接使用写死的[script/sub.php#L11](script/sub.php#L11)
   ```php
-  $example_params = "emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true";
+  $example_params = "emoji=true&list=false&udp=true&tfo=false&scv=false&fdn=false&sort=false&new_name=true";
   ```
 
 ## 服务器上的私密文件要禁止直接请求
