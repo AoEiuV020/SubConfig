@@ -64,9 +64,23 @@ dns:
   listen: 0.0.0.0:6553
   enhanced-mode: fake-ip # 模式：redir-host或fake-ip
   fake-ip-range: 198.18.0.1/16 #
-#   fake-ip-filter: # fake ip 白名单列表，如果你不知道这个参数的作用，请勿修改
-#    - "*.lan"
-#    - localhost.ptlogin2.qq.com
+  fake-ip-filter: # fake ip 白名单列表，如果你不知道这个参数的作用，请勿修改
+    - "*.*.steamstat.us"
+    - "*.steamstat.us"
+    - "*.*.steamcdn-a.akamaihd.net"
+    - "*.steamcdn-a.akamaihd.net"
+    - "*.*.steamstatic.com"
+    - "*.steamstatic.com"
+    - "*.*.steamcontent.com"
+    - "*.steamcontent.com"
+    - "*.*.steamusercontent.com"
+    - "*.steamusercontent.com"
+    - "*.*.steamgames.com"
+    - "*.steamgames.com"
+    - "*.*.steam-chat.com"
+    - "*.steam-chat.com"
+    - "*.*.steampowered.com"
+    - "*.steampowered.com"
   nameserver:
     - 223.5.5.5 # 阿里DNS
     - 180.76.76.76 # 百度DNS
