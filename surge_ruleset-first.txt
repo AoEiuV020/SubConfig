@@ -1,3 +1,3 @@
 DIRECT,https://github.com/AoEiuV020/SubConfig/raw/main/direct.list
-DIRECT,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/LocalAreaNetwork.list
+🏠 LAN,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/LocalAreaNetwork.list
 🚀 节点选择,https://github.com/AoEiuV020/SubConfig/raw/main/proxy.list

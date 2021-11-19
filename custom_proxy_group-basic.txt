@@ -3,6 +3,7 @@
 🔯 备用`select`select`!!GROUPID=1
 🔯 备备用`select`select`!!GROUPID=2
 🎯 全球直连`select`[]DIRECT`[]🚀 节点选择`国内
-🔨 破除封禁`select`[]🎯 全球直连`[]🚀 节点选择`国内
 🐙 GITHUB`select`[]🚀 节点选择`[]🎯 全球直连`懒人节点`.*
 🐟 漏网之鱼`select`[]🚀 节点选择`[]🎯 全球直连
+🔨 破除封禁`select`[]🎯 全球直连`[]🚀 节点选择`国内
+🏠 LAN`select`[]DIRECT`[]🎯 全球直连`[]🚀 节点选择`国内
