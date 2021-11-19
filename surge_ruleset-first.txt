@@ -1,3 +1,4 @@
 DIRECT,https://github.com/AoEiuV020/SubConfig/raw/main/direct.list
-🏠 LAN,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/LocalAreaNetwork.list
+🏠 HOME,IP-CIDR,192.168.2.0/24,no-resolve
+DIRECT,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/LocalAreaNetwork.list
 🚀 节点选择,https://github.com/AoEiuV020/SubConfig/raw/main/proxy.list
