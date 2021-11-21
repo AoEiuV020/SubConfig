@@ -67,8 +67,8 @@ dns:
   fake-ip-filter: # fake ip 白名单列表，如果你不知道这个参数的作用，请勿修改
     - "*.*.steamstat.us"
     - "*.steamstat.us"
-    - "*.*.steamcdn-a.akamaihd.net"
-    - "*.steamcdn-a.akamaihd.net"
+    - "*.*.akamaihd.net"
+    - "*.akamaihd.net"
     - "*.*.steamstatic.com"
     - "*.steamstatic.com"
     - "*.*.steamcontent.com"
