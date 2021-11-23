@@ -7,9 +7,9 @@
 !!GROUPID=1!!^@B·
 !!GROUPID=2!!^@C·
 HKG@香港
-TPE@台湾
-SGP@新加坡
-JPN@日本
+TP@台湾
+SG@新加坡
+JP@日本
 Hong Kong@香港
 Taiwan@台湾
 United States@美国
