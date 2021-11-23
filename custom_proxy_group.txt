@@ -1,4 +1,4 @@
-🚀 节点选择`select`[]♻️ 实用选择`[]🇭🇰 香港`[]🇹🇼 台湾`[]🇺🇸 美国`[]🇯🇵 日本`[]🇸🇬 新加坡`[]🐱 专线`[]DIRECT`.*
+🚀 节点选择`select`[]♻️ 实用选择`[]🇭🇰 香港`[]🇹🇼 台湾`[]DIRECT`.*
 ♻️ 实用选择`select`!!GROUPID=0!!懒人节点.*01`[]🔯 主机场`[]🔯 备用`[]🔯 备备用`!!GROUPID=0!!美国.*01`!!GROUPID=1!!日本.*01
 🔯 主机场`select`!!GROUPID=0!!港`!!GROUPID=0!!台`!!GROUPID=0!!新`!!GROUPID=0!!美`!!GROUPID=0!!日`!!GROUPID=0
 🔯 备用`select`select`!!GROUPID=1
@@ -16,8 +16,4 @@
 🔨 破除封禁`select`[]🎯 全球直连`[]🚀 节点选择`国内
 🏠 HOME`select`[]DIRECT`[]🎯 全球直连`[]🚀 节点选择`国内
 🇭🇰 香港`select`港|香港|HK|AZ|AWS|Azure
-🇺🇸 美国`select`美|US
-🇯🇵 日本`select`日|日本|JP
-🇸🇬 新加坡`select`新|新加坡|狮城|SG
 🇹🇼 台湾`select`彰化|新北|台|Hinet|TW
-🐱 专线`select`IPLC|专线|IEPL|iplc|iepl
