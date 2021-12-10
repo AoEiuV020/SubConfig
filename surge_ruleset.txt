@@ -6,6 +6,7 @@
 🎬 EMBY,https://github.com/AoEiuV020/SubConfig/raw/main/emby.list
 🎥 奈飞视频,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Netflix.list
 Ⓜ️ 微软服务,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Microsoft.list
+Ⓜ️ 微软服务,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Xbox.list
 📺 哔哩哔哩,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Bilibili.list
 📺 哔哩哔哩,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/BilibiliHMT.list
 🐉 巴哈姆特,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Bahamut.list
