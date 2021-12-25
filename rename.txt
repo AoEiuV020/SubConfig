@@ -6,6 +6,7 @@
 !!GROUPID=0!!^@A·
 !!GROUPID=1!!^@B·
 !!GROUPID=2!!^@C·
+HK@香港
 HKG@香港
 TP@台湾
 SG@新加坡
