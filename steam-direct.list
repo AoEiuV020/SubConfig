@@ -1,4 +1,4 @@
-
+DOMAIN-SUFFIX,cm.steampowered.com
 # https://ipinfo.io/AS32590#block-ranges
 IP-CIDR,103.10.124.0/24,no-resolve
 IP-CIDR,103.10.125.0/24,no-resolve
