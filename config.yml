@@ -104,5 +104,16 @@ dns:
     geoip: true # 默认
     ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
       - 240.0.0.0/4
+    domain:
+      - +.google.com
+      - +.google.com.hk
+      - +.facebook.com
+      - +.twitter.com
+      - +.youtube.com
+      - +.xn--ngstr-lra8j.com
+      - +.google.cn
+      - +.googleapis.cn
+      - +.googleapis.com
+      - +.gvt1.com
   nameserver-policy: #通过特定域名服务器查找域名
     "mirrors.tencentyun.com": "127.0.0.53" # 腾讯云服务器默认的镜像源仅限内网使用，
