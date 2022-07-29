@@ -117,7 +117,12 @@ jobs:
           echo 先整理出订阅数组，
           cat subscribe |jq -srR 'split("\n")|map(select(length > 0))' > subscribe.json
           echo 再下载节点列表，方便后面复用避免重复请求机场订阅，
-          cat subscribe.json |jq -r 'map(select(startswith("http")and(startswith("https://t.me/")|not)))' |jq -r 'to_entries[]|"curl -s -L -o subconverter/sub/"+(.key|tostring)+" "+(.value|@sh)' |sh
+          cat subscribe.json |jq -r 'map(select(startswith("http")and(startswith("https://t.me/")|not)))' |jq -r 'to_entries[]|"echo fetching: "+(.key|tostring)+" && "+"curl -s -L --fail -o subconverter/sub/"+(.key|tostring)+" "+(.value|@sh)' |sh -e
+          if [ $? != 0 ]
+          then
+              echo 订阅下载失败，
+              exit 2
+          fi
           echo 订阅转成本地请求，其他链接保留，
           url=$(cat subscribe.json |jq -r 'to_entries|map(if (.value|(startswith("http")and(startswith("https://t.me/")|not))) then (.key|tostring|"sub/"+.) else .value end)|join("|")|@uri')
           echo 拼接自己需要的配置请求，
