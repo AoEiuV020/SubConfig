@@ -12,7 +12,6 @@
 📺 哔哩哔哩,https://github.com/AoEiuV020/SubConfig/raw/main/BilibiliHMT.list
 🐉 巴哈姆特,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Bahamut.list
 🎯 全球直连,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/ChinaDomain.list
-🎯 全球直连,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/ChinaCompanyIp.list
 🎯 全球直连,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Download.list
 🚀 节点选择,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/ProxyLite.list
 🎯 全球直连,[]GEOIP,CN
