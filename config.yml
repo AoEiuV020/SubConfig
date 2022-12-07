@@ -106,14 +106,11 @@ dns:
       - 240.0.0.0/4
     domain:
       - +.v2ex.com
-      - +.google.com
+      - www.google.com
       - +.google.com.hk
       - +.facebook.com
       - +.twitter.com
       - +.youtube.com
-      - +.xn--ngstr-lra8j.com
-      - +.google.cn
-      - +.googleapis.cn
       - +.googleapis.com
       - +.gvt1.com
   nameserver-policy: #通过特定域名服务器查找域名
