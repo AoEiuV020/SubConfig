@@ -73,8 +73,13 @@ jobs:
       - name: run subconverter
         run: |
           echo 下载subconverter,
-          curl -s -L -o release 'https://api.github.com/repos/tindy2013/subconverter/releases/latest'
-          cat release
+          code=$(curl -s -L -o release -w '%{http_code}' -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" 'https://api.github.com/repos/tindy2013/subconverter/releases/latest')
+          if [[ "$code" != 200 ]]
+          then
+              echo api请求异常，
+              cat release
+              exit 3
+          fi
           curl -s -L -O $(cat release | jq -r '.assets[]| select(.name == "subconverter_linux64.tar.gz").browser_download_url')
           tar -zxf subconverter_linux64.tar.gz
           cd subconverter
