@@ -73,7 +73,9 @@ jobs:
       - name: run subconverter
         run: |
           echo 下载subconverter,
-          curl -s -L -O $(curl -s -L 'https://api.github.com/repos/tindy2013/subconverter/releases' | jq -r '.[0].assets[]| select(.name == "subconverter_linux64.tar.gz").browser_download_url')
+          curl -s -L -o release 'https://api.github.com/repos/tindy2013/subconverter/releases/latest'
+          cat release
+          curl -s -L -O $(cat release | jq -r '.assets[]| select(.name == "subconverter_linux64.tar.gz").browser_download_url')
           tar -zxf subconverter_linux64.tar.gz
           cd subconverter
           echo 更改base_path以便支持缓存base配置文件，
