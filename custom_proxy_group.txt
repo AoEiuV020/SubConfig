@@ -13,7 +13,6 @@
 📹 YouTube`select`[]🚀 节点选择`[]🔯 主机场`[]🔯 备用`[]🔯 备备用`.*
 🎥 奈飞视频`select`[]🚀 节点选择`NF`解锁`原生`.*
 🛑 全球拦截`select`[]REJECT`[]🎯 全球直连`[]🚀 节点选择
-🔨 破除封禁`select`[]🎯 全球直连`[]🚀 节点选择`国内
 🏠 HOME`select`[]DIRECT`[]🎯 全球直连`[]🚀 节点选择`国内
 🇭🇰 香港`select`港|香港|HK|AZ|AWS|Azure
 🇹🇼 台湾`select`彰化|新北|台|Hinet|TW
