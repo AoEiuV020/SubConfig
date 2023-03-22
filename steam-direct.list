@@ -1,4 +1,7 @@
 DOMAIN-SUFFIX,cm.steampowered.com
+# 启动时调用的，
+DOMAIN,api.steampowered.com
+DOMAIN,test.steampowered.com
 # https://ipinfo.io/AS32590#block-ranges
 IP-CIDR,103.10.124.0/24,no-resolve
 IP-CIDR,103.10.125.0/24,no-resolve
@@ -46,4 +49,5 @@ IP-CIDR,208.64.201.0/24,no-resolve
 IP-CIDR,208.64.202.0/24,no-resolve
 IP-CIDR,208.64.203.0/24,no-resolve
 IP-CIDR,208.78.164.0/22,no-resolve
+#
 IP-CIDR,45.121.184.0/23,no-resolve
