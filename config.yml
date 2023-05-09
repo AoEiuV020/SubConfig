@@ -97,3 +97,4 @@ dns:
       - +.gvt1.com
   nameserver-policy: #通过特定域名服务器查找域名
     "mirrors.tencentyun.com": "127.0.0.53" # 腾讯云服务器默认的镜像源仅限内网使用，
+    "dl.google.com": "223.5.5.5" # dl走直连，如果被境外dns解析到境外ip就连不上了，
