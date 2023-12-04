@@ -117,4 +117,4 @@ jobs:
       - name: Setup Debug Session
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: AoEiuV020/debugger-action@master
+        uses: mxschmitt/action-tmate@master
