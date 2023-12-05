@@ -36,19 +36,29 @@
                 "outbound": [
                     "any"
                 ],
+                "server": "dns_resolver"
+            },
+            {
+                "geosite": [
+                    "category-ads-all"
+                ],
+                "server": "dns_block",
+                "disable_cache": true
+            },
+            {
+                "geosite": [
+                    "geolocation-!cn"
+                ],
+                "query_type": [
+                    "A"
+                ],
                 "server": "dns_fakeip"
             },
             {
-              "rule_set": "geosite-cn",
-              "outbound": "DIRECT"
-            }
-        ],
-        "rule_set": [
-            {
-                "tag": "geosite-cn",
-                "type": "remote",
-                "format": "binary",
-                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
+                "geosite": [
+                    "geolocation-!cn"
+                ],
+                "server": "dns_proxy"
             }
         ],
         "final": "dns_direct",
