@@ -169,7 +169,7 @@
             "external_controller": "0.0.0.0:9090",
             "external_ui": "ui",
             "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
-            "external_ui_download_detour": "select",
+            "external_ui_download_detour": "🚀 节点选择",
             "secret": "",
             "default_mode": "rule",
             "store_selected": true,
