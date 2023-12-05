@@ -8,7 +8,7 @@
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "https://1.1.1.1/dns-query",
+                "address": "https://dns.google/dns-query",
                 "address_resolver": "dns_resolver",
                 "strategy": "ipv4_only",
                 "detour": "🚀 节点选择"
@@ -78,7 +78,7 @@
                 "server": "dns_proxy"
             }
         ],
-        "final": "dns_proxy"
+        "final": "dns_direct"
     },
     "ntp": {
         "enabled": true,
