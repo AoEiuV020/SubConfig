@@ -8,7 +8,7 @@
         "servers": [
             {
                 "tag": "dns_proxy",
-                "address": "https://dns.google/dns-query",
+                "address": "https://1.1.1.1/dns-query",
                 "address_resolver": "dns_resolver",
                 "strategy": "ipv4_only",
                 "detour": "🚀 节点选择"
@@ -41,8 +41,63 @@
                 "server": "dns_proxy"
             },
             {
+                "process_name": [
+                    "TencentMeeting",
+                    "NemoDesktop",
+                    "ToDesk",
+                    "ToDesk_Service",
+                    "WeChat",
+                    "Tailscale",
+                    "wireguard-go",
+                    "Tunnelblick",
+                    "softwareupdated",
+                    "kubectl"
+                ],
+                "server": "dns_direct"
+            },
+            {
+                "process_path": [
+                    "/usr/libexec/rosetta/oahd"
+                ],
+                "server": "dns_direct"
+            },
+            {
                 "inbound": [
                     "socks-in"
+                ],
+                "server": "dns_proxy"
+            },
+            {
+                "domain_suffix": [
+                    "openai.com",
+                    "depay.one",
+                    "orbstack.dev"
+                ],
+                "server": "dns_proxy"
+            },
+            {
+                "process_name": [
+                    "DropboxMacUpdate",
+                    "Dropbox"
+                ],
+                "server": "dns_proxy"
+            },
+            {
+                "package_name": [
+                    "com.google.android.youtube",
+                    "com.android.vending",
+                    "org.telegram.messenger",
+                    "org.telegram.plus"
+                ],
+                "server": "dns_proxy"
+            },
+            {
+                "domain": [
+                    "accounts.google.com"
+                ],
+                "domain_suffix": [
+                    "sourceforge.net",
+                    "fhjasokiwq.com"
                 ],
                 "server": "dns_proxy"
             },
