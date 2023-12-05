@@ -18,7 +18,7 @@
                 "address": "h3://dns.alidns.com/dns-query",
                 "address_resolver": "dns_resolver",
                 "strategy": "ipv4_only",
-                "detour": "direct"
+                "detour": "DIRECT"
             },
             {
                 "tag": "dns_block",
@@ -28,7 +28,7 @@
                 "tag": "dns_resolver",
                 "address": "223.5.5.5",
                 "strategy": "ipv4_only",
-                "detour": "direct"
+                "detour": "DIRECT"
             }
         ],
         "rules": [
@@ -112,7 +112,7 @@
     "experimental": {
         "clash_api": {
             "external_controller": "0.0.0.0:9090",
-            "external_ui": "metacubexd",
+            "external_ui": "ui",
             "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
             "external_ui_download_detour": "select",
             "secret": "",
