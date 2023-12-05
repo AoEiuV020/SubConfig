@@ -73,7 +73,7 @@ jobs:
       - name: run subconverter
         run: |
           echo 下载subconverter,
-          code=$(curl -s -L -o release -w '%{http_code}' -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" 'https://api.github.com/repos/tindy2013/subconverter/releases/latest')
+          code=$(curl -s -L -o release -w '%{http_code}' -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" 'https://api.github.com/repos/AoEiuV020/subconverter-build/releases/latest')
           if [[ "$code" != 200 ]]
           then
               echo api请求异常，
@@ -136,7 +136,7 @@ jobs:
           mkdir -p config
           for suffix in "" "-basic" "-break"
           do
-              for target in "clash" "quan" "v2ray" "ssr"
+              for target in "clash" "quan" "v2ray" "ssr" "singbox"
               do
                   config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
                   code=$(curl -s -L -o config/$target$suffix -w '%{http_code}' "http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params")
