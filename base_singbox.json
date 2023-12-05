@@ -33,11 +33,11 @@
         ],
         "rules": [
             {
-                "clash_mode": "direct",
+                "clash_mode": "Direct",
                 "server": "dns_direct"
             },
             {
-                "clash_mode": "global",
+                "clash_mode": "Global",
                 "server": "dns_proxy"
             },
             {
