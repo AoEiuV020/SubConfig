@@ -27,7 +27,7 @@
                 "detour": "DIRECT"
             },
             {
-                "tag": "block",
+                "tag": "dns_block",
                 "address": "rcode://success"
             }
         ],
@@ -36,29 +36,11 @@
                 "outbound": [
                     "any"
                 ],
-                "server": "dns_resolver"
-            },
-            {
-                "geosite": [
-                    "category-ads-all"
-                ],
-                "server": "dns_block",
-                "disable_cache": true
-            },
-            {
-                "geosite": [
-                    "geolocation-!cn"
-                ],
-                "query_type": [
-                    "A"
-                ],
-                "server": "dns_fakeip"
-            },
-            {
-                "geosite": [
-                    "geolocation-!cn"
-                ],
                 "server": "dns_proxy"
+            },
+            {
+                "geosite": "cn",
+                "server": "dns_direct"
             }
         ],
         "final": "dns_direct",
