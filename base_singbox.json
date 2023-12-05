@@ -1,0 +1,97 @@
+{
+    "log": {
+        "disabled": false,
+        "level": "info",
+        "timestamp": true
+    },
+    "dns": {
+        "servers": [
+            {
+                "tag": "dns_proxy",
+                "address": "https://dns.google/dns-query",
+                "address_resolver": "dns_resolver"
+            },
+            {
+                "tag": "dns_direct",
+                "address": "h3://dns.alidns.com/dns-query",
+                "address_resolver": "dns_resolver",
+                "detour": "DIRECT"
+            },
+            {
+                "tag": "dns_fakeip",
+                "address": "fakeip"
+            },
+            {
+                "tag": "dns_resolver",
+                "address": "223.5.5.5",
+                "detour": "DIRECT"
+            },
+            {
+                "tag": "block",
+                "address": "rcode://success"
+            }
+        ],
+        "rules": [
+            {
+                "outbound": [
+                    "any"
+                ],
+                "server": "dns_fakeip"
+            },
+            {
+              "rule_set": "geosite-cn",
+              "outbound": "DIRECT"
+            }
+        ],
+        "rule_set": [
+            {
+                "tag": "geosite-cn",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
+            }
+        ],
+        "final": "dns_direct",
+        "strategy": "ipv4_only",
+        "independent_cache": true,
+        "reverse_mapping": true,
+        "fakeip": {
+            "enabled": true,
+            "inet4_range": "198.18.0.0\/15"
+        }
+    },
+    "ntp": {
+        "enabled": true,
+        "server": "time.apple.com",
+        "server_port": 123,
+        "interval": "30m",
+        "detour": "DIRECT"
+    },
+    "inbounds": [
+        {
+            "type": "mixed",
+            "tag": "mixed-in",
+            "listen": "0.0.0.0",
+            "listen_port": 2080
+        },
+        {
+            "type": "tun",
+            "tag": "tun-in",
+            "inet4_address": "172.19.0.1/30",
+            "auto_route": true,
+            "strict_route": true,
+            "stack": "mixed",
+            "sniff": true
+        }
+    ],
+    "outbounds": [],
+    "route": {
+        "rules": [],
+        "auto_detect_interface": true
+    },
+    "experimental": {
+        "cache_file": {
+            "enabled": true
+        }
+    }
+}
