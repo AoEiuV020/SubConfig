@@ -21,6 +21,10 @@
                 "detour": "DIRECT"
             },
             {
+              "tag": "dns_fakeip",
+              "address": "fakeip"
+            },
+            {
                 "tag": "dns_block",
                 "address": "rcode://refused"
             },
@@ -39,6 +43,12 @@
             {
                 "clash_mode": "Global",
                 "server": "dns_proxy"
+            },
+            {
+              "outbound": [
+                "any"
+              ],
+              "server": "dns_resolver"
             },
             {
                 "process_name": [
@@ -110,8 +120,11 @@
             {
                 "geosite": [
                     "geolocation-!cn"
-                ],
-                "server": "dns_proxy"
+                  ],
+                  "query_type": [
+                    "A"
+                  ],
+                  "server": "dns_fakeip"
             },
             {
                 "geosite": [
@@ -133,7 +146,12 @@
                 "server": "dns_proxy"
             }
         ],
-        "final": "dns_direct"
+        "final": "dns_direct",
+        "independent_cache": true,
+        "fakeip": {
+          "enabled": true,
+          "inet4_range": "198.18.0.0/15"
+        }
     },
     "ntp": {
         "enabled": true,
