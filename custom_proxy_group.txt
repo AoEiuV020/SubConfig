@@ -1,5 +1,5 @@
 🚀 节点选择`select`[]♻️ 实用选择`[]🇭🇰 香港`[]🇹🇼 台湾`[]DIRECT`.*
-♻️ 实用选择`select`!!GROUPID=0!!懒人节点.*01`[]🔯 主机场`[]🔯 备用`[]🔯 备备用`!!GROUPID=0!!美国.*01`!!GROUPID=1!!日本.*01
+♻️ 实用选择`select`[]🔯 主机场`[]🔯 备用`[]🔯 备备用`!!GROUPID=0!!懒人节点.*01`!!GROUPID=0!!美国.*01`!!GROUPID=1!!日本.*01
 🔯 主机场`select`!!GROUPID=0!!港`!!GROUPID=0!!台`!!GROUPID=0!!新`!!GROUPID=0!!美`!!GROUPID=0!!日`!!GROUPID=0
 🔯 备用`select`!!GROUPID=1!!x0.1x`!!GROUPID=1!!x0.5x`!!GROUPID=1!!港`!!GROUPID=1!!台`!!GROUPID=1!!新`!!GROUPID=1!!美`!!GROUPID=1!!日`!!GROUPID=1
 🔯 备备用`select`!!GROUPID=2
