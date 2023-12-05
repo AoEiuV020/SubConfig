@@ -45,12 +45,6 @@
                 "server": "dns_proxy"
             },
             {
-              "outbound": [
-                "any"
-              ],
-              "server": "dns_resolver"
-            },
-            {
                 "process_name": [
                     "TencentMeeting",
                     "NemoDesktop",
