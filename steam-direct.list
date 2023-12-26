@@ -1,5 +1,5 @@
 DOMAIN-SUFFIX,cm.steampowered.com
 DOMAIN-SUFFIX,steamserver.net
 # 启动时调用的，
-DOMAIN,api.steampowered.com
-DOMAIN,test.steampowered.com
+# DOMAIN,api.steampowered.com
+# DOMAIN,test.steampowered.com
