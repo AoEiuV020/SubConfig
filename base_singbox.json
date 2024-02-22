@@ -183,9 +183,13 @@
             "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
             "external_ui_download_detour": "🚀 节点选择",
             "secret": "",
-            "default_mode": "rule",
-            "store_selected": true,
-            "cache_file": "cache.db"
+            "default_mode": "rule"
+        },
+        "cache_file": {
+          "enabled": true,
+          "path": "cache.db",
+          "cache_id": "my_profile2",
+          "store_fakeip": true
         }
     }
 }
