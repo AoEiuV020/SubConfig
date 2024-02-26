@@ -30,7 +30,7 @@
             },
             {
                 "tag": "dns_resolver",
-                "address": "223.5.5.5",
+                "address": "udp://223.5.5.5",
                 "strategy": "ipv4_only",
                 "detour": "DIRECT"
             }
