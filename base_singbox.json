@@ -118,7 +118,7 @@
                   "query_type": [
                     "A"
                   ],
-                  "server": "dns_fakeip"
+                  "server": "dns_proxy"
             },
             {
                 "geosite": [
