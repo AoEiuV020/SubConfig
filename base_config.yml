@@ -81,7 +81,8 @@ dns:
     - https://cloudflare-dns.com/dns-query
     - https://dns.google/dns-query
   fallback-filter:
-    geoip: false
+    geoip: true
+    geoip-code: CN
     ipcidr:
       - 0.0.0.0/8
       - 10.0.0.0/8
