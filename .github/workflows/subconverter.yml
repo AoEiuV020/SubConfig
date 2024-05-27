@@ -73,7 +73,7 @@ jobs:
       - name: run subconverter
         run: |
           echo 下载subconverter,
-          code=$(curl -s -L -o release -w '%{http_code}' -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" 'https://api.github.com/repos/AoEiuV020/subconverter-build/releases/latest')
+          code=$(curl -s -L -o release -w '%{http_code}' -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" 'https://api.github.com/repos/tindy2013/subconverter/releases/latest')
           if [[ "$code" != 200 ]]
           then
               echo api请求异常，
