@@ -187,8 +187,13 @@ jobs:
               echo generate random token at $TOKEN_FILE
               echo $token > $TOKEN_FILE
           fi
-          curl -s "$(cat $DEPLOY_URL_FILE)" -F "token=$token" -F "file=@config.tar.gz.aes"
-
+          code=$(curl -s -o deploy_config.out -w '%{http_code}' "$(cat $DEPLOY_URL_FILE)" -F "token=$token" -F "file=@config.tar.gz.aes")
+          if [[ "$code" != 200 ]]
+          then
+              echo 上传配置异常，
+              cat deploy_config.out
+              exit 4
+          fi
       - name: decrypt config
         if: ${{ env.artifact == 'true' }}
         run: |
