@@ -4,6 +4,7 @@
 🎯 全球直连,https://github.com/AoEiuV020/SubConfig/raw/main/ubisoft-direct.list
 🐙 GITHUB,https://github.com/AoEiuV020/SubConfig/raw/main/github.list
 🤖 OpenAI,https://github.com/AoEiuV020/SubConfig/raw/main/openAi.list
+🤖 Gemini,https://github.com/AoEiuV020/SubConfig/raw/main/gemini.list
 🖼️ Imgur,https://github.com/AoEiuV020/SubConfig/raw/main/imgur.list
 📹 YouTube,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/YouTube.list
 🎬 EMBY,https://github.com/AoEiuV020/SubConfig/raw/main/emby.list
