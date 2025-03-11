@@ -67,6 +67,7 @@ dns:
   fake-ip-filter:
     - "*.aoeiuv020.com"
     - "*.nip.io"
+    - "*.traefik.me"
     - "*.openvidu-local.dev"
     # 下面是openclash的fake-ip-filter
     - "*.lan"
@@ -185,12 +186,24 @@ dns:
     - https://dns.alidns.com/dns-query # 阿里 DoH DNS
     - https://doh.360.cn/dns-query # 360 DoH DNS
   fallback:
-    - tls://dns.rubyfish.cn:853
-    - tls://1.0.0.1:853
-    - tls://dns.google:853
-    - https://dns.rubyfish.cn/dns-query
-    - https://cloudflare-dns.com/dns-query
+    - tls://dns.quad9.net
+    - tls://dns.google
+    - tls://jp.tiar.app
+    - tls://dot.tiar.app
+    - https://dns.quad9.net/dns-query
     - https://dns.google/dns-query
+    - https://dns.cloudflare.com/dns-query
+    - https://public.dns.iij.jp/dns-query
+    - https://jp.tiar.app/dns-query
+    - https://jp.tiarap.org/dns-query
+    - https://doh.dnslify.com/dns-query
+    - https://dns.twnic.tw/dns-query
+    - https://dns.oszx.co/dns-query
+    - https://doh.applied-privacy.net/query
+  default-nameserver:
+    - 114.114.114.114
+    - 119.29.29.29
+    - 223.5.5.5
   fallback-filter:
     geoip: true
     geoip-code: CN
