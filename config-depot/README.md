@@ -4,7 +4,7 @@
 
 ## 数据目录
 
-默认数据目录是当前目录，Docker 中是 `/data`。
+默认数据目录是 `data`，Docker 镜像中是 `/data`。
 
 | 文件或目录 | 说明 |
 |------------|------|
@@ -28,14 +28,14 @@ Docker Compose 运行：
 docker compose up -d --build
 ```
 
-compose 默认使用 named volume 挂载到容器的 `/data`。容器以非 root 用户运行；正式部署时如果改成绑定原来的站点数据目录，例如 `/var/www/sub:/data`，需要先让容器用户可写该目录。
+compose 默认把本地 `./data` 绑定挂载到容器的 `/data`。容器以非 root 用户运行；正式部署时如果改成绑定原来的站点数据目录，例如 `/var/www/sub:/data`，需要先让容器用户可写该目录。
 
 ## 环境变量
 
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
 | `CONFIG_DEPOT_ADDR` | `:8080` | HTTP 监听地址 |
-| `CONFIG_DEPOT_DATA_DIR` | `.` | 数据目录 |
+| `CONFIG_DEPOT_DATA_DIR` | `data` | 数据目录 |
 | `CONFIG_DEPOT_CONFIG_DIR` | `<data>/config` | 配置缓存目录 |
 | `CONFIG_DEPOT_UPLOAD_SECRET_FILE` | `<data>/upload_secret` | 上传密钥文件 |
 | `CONFIG_DEPOT_UPLOAD_TOKEN_FILE` | `<data>/upload_token` | 上传 token 文件 |

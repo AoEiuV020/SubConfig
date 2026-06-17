@@ -2,7 +2,7 @@ package app
 
 const (
 	DefaultAddress         = ":8080"
-	DefaultDataDir         = "."
+	DefaultDataDir         = "data"
 	DefaultConfigDirName   = "config"
 	DefaultUploadSecret    = "upload_secret"
 	DefaultUploadToken     = "upload_token"

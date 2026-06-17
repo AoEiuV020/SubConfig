@@ -7,11 +7,7 @@ services:
       - "127.0.0.1:8080:8080"
     environment:
       CONFIG_DEPOT_ADDR: ":8080"
-      CONFIG_DEPOT_DATA_DIR: /data
       CONFIG_DEPOT_BACKEND_URL: "https://subc.020.name/sub?"
       CONFIG_DEPOT_REMOTE_CONFIG_URL: "https://github.com/AoEiuV020/SubConfig/raw/main/subconverter.ini"
     volumes:
-      - config-depot-data:/data
-
-volumes:
-  config-depot-data:
+      - ./data:/data

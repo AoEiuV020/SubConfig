@@ -8,7 +8,7 @@
 
 | 路径 | 职责 |
 |------|------|
-| `cmd/config-depot/main.go` | 进程入口，读取环境变量并启动 HTTP 服务 |
+| `cmd/config-depot/main.go` | 程序本体入口，读取环境变量并启动 HTTP 服务 |
 | `internal/app/defaults.go` | 默认值和环境变量名，修改默认配置优先看这里 |
 | `internal/app/config.go` | 环境变量读取和运行参数解析 |
 | `internal/app/server.go` | HTTP 路由、上传接口、订阅下载接口、缓存逻辑 |
@@ -16,8 +16,8 @@
 | `internal/app/archive.go` | `tar.gz` 解包和路径逃逸防护 |
 | `internal/app/*_test.go` | 加解密兼容、上传解包、缓存下载和私密文件不暴露的测试 |
 | `Dockerfile` | 多阶段构建，builder 使用 Go，运行时使用 `scratch` |
-| `compose.yaml` | 本地容器运行示例，默认使用 named volume 挂载 `/data` |
-| `.gitignore`、`.dockerignore` | 忽略本地密钥、数据目录、构建产物和压缩包 |
+| `compose.yaml` | 本地容器运行示例，把本地 `./data` 绑定挂载到容器 `/data` |
+| `.gitignore`、`.dockerignore` | 忽略本地 `data/`、`config-depot` 构建产物和压缩包 |
 
 ## HTTP 行为
 
@@ -31,7 +31,7 @@
 
 ## 数据目录
 
-默认数据目录是当前目录，Docker 中是 `/data`。
+默认数据目录是 `data`，Docker 镜像中是 `/data`。`compose.yaml` 绑定挂载本地 `./data`，方便用户直接编辑密钥和订阅文件。
 
 | 文件或目录 | 说明 |
 |------------|------|
@@ -66,4 +66,6 @@ docker build -t config-depot:local-test .
 docker compose config
 ```
 
-如果本地沙箱不允许写默认 Go cache，可把 `GOCACHE` 指向仓库 `tmp/` 下的临时目录。端到端演练也放仓库 `tmp/` 下，生成的压缩包、密钥、上传结果和下载结果都应被 ignore 覆盖。
+`go build ./cmd/config-depot` 的默认产物是当前目录下的 `config-depot`，对应路径为 `config-depot/config-depot`，由 `.gitignore` 覆盖。
+
+端到端演练生成的压缩包、密钥、上传结果和下载结果都应被 ignore 覆盖。

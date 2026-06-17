@@ -21,12 +21,6 @@ coverage.*
 
 # 本地运行数据与密钥
 /data/
-/config/
-/upload_secret
-/upload_token
-/sub_secret
-/subscribe
-/deploy_url
 
 # 本地演练产物
 *.tar
