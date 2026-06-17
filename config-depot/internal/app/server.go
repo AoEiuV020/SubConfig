@@ -103,7 +103,7 @@ func (server *Server) handleUpload(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "上传密钥格式无效", http.StatusInternalServerError)
 		return
 	}
-	bundle, err := DecryptAES256CBC(raw, key, DefaultUploadIV)
+	bundle, err := DecryptUploadBundle(raw, key)
 	if err != nil {
 		http.Error(w, "解密上传文件失败", http.StatusBadRequest)
 		return

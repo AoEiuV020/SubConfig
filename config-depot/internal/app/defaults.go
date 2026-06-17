@@ -10,7 +10,6 @@ const (
 	DefaultSubscribe       = "subscribe"
 	DefaultBackendURL      = "https://subc.020.name/sub?"
 	DefaultRemoteConfigURL = "https://github.com/AoEiuV020/SubConfig/raw/main/subconverter.ini"
-	DefaultUploadIVBase64  = "EJwC9OfO/fkuTvPax7YHeQ=="
 	DefaultHTTPTimeoutSec  = 30
 )
 

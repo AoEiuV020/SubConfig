@@ -29,7 +29,7 @@ func TestUploadDecryptsAndExtractsConfigBundle(t *testing.T) {
 		"clash":      "clash config",
 		"quan-basic": "quan basic config",
 	})
-	encrypted, err := EncryptAES256CBC(bundle, key, DefaultUploadIV)
+	encrypted, err := EncryptUploadBundle(bundle, key)
 	if err != nil {
 		t.Fatalf("encrypt bundle: %v", err)
 	}

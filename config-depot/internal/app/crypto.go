@@ -3,12 +3,39 @@ package app
 import (
 	"crypto/aes"
 	"crypto/cipher"
+	"crypto/rand"
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"io"
 )
 
-var DefaultUploadIV = mustDecodeUploadIV()
+const uploadIVSize = aes.BlockSize
+
+func EncryptUploadBundle(plaintext []byte, key []byte) ([]byte, error) {
+	iv := make([]byte, uploadIVSize)
+	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
+		return nil, fmt.Errorf("generate upload IV: %w", err)
+	}
+	ciphertext, err := EncryptAES256CBC(plaintext, key, iv)
+	if err != nil {
+		return nil, err
+	}
+
+	encrypted := make([]byte, 0, len(iv)+len(ciphertext))
+	encrypted = append(encrypted, iv...)
+	encrypted = append(encrypted, ciphertext...)
+	return encrypted, nil
+}
+
+func DecryptUploadBundle(encrypted []byte, key []byte) ([]byte, error) {
+	if len(encrypted) <= uploadIVSize {
+		return nil, errors.New("encrypted upload bundle is too short")
+	}
+	iv := encrypted[:uploadIVSize]
+	ciphertext := encrypted[uploadIVSize:]
+	return DecryptAES256CBC(ciphertext, key, iv)
+}
 
 func DecryptAES256CBC(ciphertext []byte, key []byte, iv []byte) ([]byte, error) {
 	if len(key) != 32 {
@@ -87,15 +114,4 @@ func unpadPKCS7(data []byte, blockSize int) ([]byte, error) {
 		}
 	}
 	return data[:len(data)-padding], nil
-}
-
-func mustDecodeUploadIV() []byte {
-	decoded, err := base64.StdEncoding.DecodeString(DefaultUploadIVBase64)
-	if err != nil {
-		panic(err)
-	}
-	if len(decoded) != aes.BlockSize {
-		panic("default upload IV must be one AES block")
-	}
-	return decoded
 }

@@ -11,7 +11,7 @@ fork 后可以直接运行 workflow 试用。未配置 `SUBSCRIBE` 时，workflo
 | 名称 | 说明 |
 |------|------|
 | `SUBSCRIBE` | 订阅链接，一行一个 |
-| `UPLOAD_SECRET` | 配置包 AES-256-CBC 加密密钥，base64 字符串，解码后 32 字节 |
+| `UPLOAD_SECRET` | 配置包 AES-256-CBC 加密密钥，base64 字符串，解码后 32 字节；上传包前 16 字节保存随机 IV |
 | `UPLOAD_TOKEN` | 上传接口使用的 token |
 | `DEPLOY_URL` | `config-depot` 上传地址，例如 `https://host/upload` |
 

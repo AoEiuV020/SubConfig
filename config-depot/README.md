@@ -52,4 +52,4 @@ compose 默认使用 named volume 挂载到容器的 `/data`。容器以非 root
 | `/sub` | `GET` | 参数 `url=<sub_secret>`，可选 `target`、`ver`、`cache=false` |
 | `/healthz` | `GET` | 返回 `ok` |
 
-`/upload` 解密方式与 workflow 完全对应：AES-256-CBC、PKCS#7 padding、固定 IV `EJwC9OfO/fkuTvPax7YHeQ==`、`openssl enc` 使用 `-nosalt`。
+`/upload` 解密方式与 workflow 完全对应：上传包前 16 字节为随机 IV，后续内容为 AES-256-CBC 密文；padding 为 PKCS#7，`openssl enc` 使用 `-nosalt`。

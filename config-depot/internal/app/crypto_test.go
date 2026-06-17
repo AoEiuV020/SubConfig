@@ -8,9 +8,10 @@ import (
 
 func TestDecryptMatchesWorkflowOpenSSL(t *testing.T) {
 	key := mustDecodeBase64(t, "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=")
+	iv := mustDecodeBase64(t, "EJwC9OfO/fkuTvPax7YHeQ==")
 	ciphertext := mustDecodeBase64(t, "ceFxS7ro9hgTgz6P5+ThPHLgbEZlztkzY+dO0BznT1Q=")
 
-	plaintext, err := DecryptAES256CBC(ciphertext, key, DefaultUploadIV)
+	plaintext, err := DecryptAES256CBC(ciphertext, key, iv)
 	if err != nil {
 		t.Fatalf("decrypt openssl ciphertext: %v", err)
 	}
@@ -22,9 +23,10 @@ func TestDecryptMatchesWorkflowOpenSSL(t *testing.T) {
 
 func TestEncryptMatchesWorkflowOpenSSL(t *testing.T) {
 	key := mustDecodeBase64(t, "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=")
+	iv := mustDecodeBase64(t, "EJwC9OfO/fkuTvPax7YHeQ==")
 	want := mustDecodeBase64(t, "ceFxS7ro9hgTgz6P5+ThPHLgbEZlztkzY+dO0BznT1Q=")
 
-	got, err := EncryptAES256CBC([]byte("hello config-depot\n"), key, DefaultUploadIV)
+	got, err := EncryptAES256CBC([]byte("hello config-depot\n"), key, iv)
 	if err != nil {
 		t.Fatalf("encrypt: %v", err)
 	}
@@ -33,21 +35,68 @@ func TestEncryptMatchesWorkflowOpenSSL(t *testing.T) {
 	}
 }
 
-func TestEncryptDecryptRoundTrip(t *testing.T) {
+func TestUploadBundleEncryptDecryptRoundTrip(t *testing.T) {
 	key := mustDecodeBase64(t, "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=")
 	plaintext := []byte("config archive bytes")
 
-	ciphertext, err := EncryptAES256CBC(plaintext, key, DefaultUploadIV)
+	encrypted, err := EncryptUploadBundle(plaintext, key)
 	if err != nil {
 		t.Fatalf("encrypt: %v", err)
 	}
-	decrypted, err := DecryptAES256CBC(ciphertext, key, DefaultUploadIV)
+	decrypted, err := DecryptUploadBundle(encrypted, key)
 	if err != nil {
 		t.Fatalf("decrypt: %v", err)
 	}
 
 	if !bytes.Equal(decrypted, plaintext) {
 		t.Fatalf("decrypted = %q", decrypted)
+	}
+}
+
+func TestEncryptUploadBundleUsesFreshIV(t *testing.T) {
+	key := mustDecodeBase64(t, "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=")
+	plaintext := []byte("same archive bytes")
+
+	first, err := EncryptUploadBundle(plaintext, key)
+	if err != nil {
+		t.Fatalf("encrypt: %v", err)
+	}
+	second, err := EncryptUploadBundle(plaintext, key)
+	if err != nil {
+		t.Fatalf("encrypt again: %v", err)
+	}
+	if bytes.Equal(first, second) {
+		t.Fatalf("encrypted payloads should differ")
+	}
+}
+
+func TestDecryptUploadBundleReadsPrefixedIV(t *testing.T) {
+	key := mustDecodeBase64(t, "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=")
+	iv := mustDecodeBase64(t, "EJwC9OfO/fkuTvPax7YHeQ==")
+	plaintext := []byte("config archive bytes")
+
+	ciphertext, err := EncryptAES256CBC(plaintext, key, iv)
+	if err != nil {
+		t.Fatalf("encrypt: %v", err)
+	}
+	encrypted := append(append([]byte{}, iv...), ciphertext...)
+
+	decrypted, err := DecryptUploadBundle(encrypted, key)
+	if err != nil {
+		t.Fatalf("decrypt: %v", err)
+	}
+	if !bytes.Equal(decrypted, plaintext) {
+		t.Fatalf("decrypted = %q", decrypted)
+	}
+}
+
+func TestDecryptUploadBundleRejectsMissingIV(t *testing.T) {
+	key := mustDecodeBase64(t, "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=")
+
+	for _, encrypted := range [][]byte{nil, bytes.Repeat([]byte{0x01}, 15)} {
+		if _, err := DecryptUploadBundle(encrypted, key); err == nil {
+			t.Fatalf("decrypt should reject payload length %d", len(encrypted))
+		}
 	}
 }
 

@@ -12,7 +12,7 @@
 | `internal/app/defaults.go` | 默认值和环境变量名，修改默认配置优先看这里 |
 | `internal/app/config.go` | 环境变量读取和运行参数解析 |
 | `internal/app/server.go` | HTTP 路由、上传接口、订阅下载接口、缓存逻辑 |
-| `internal/app/crypto.go` | AES-256-CBC 加解密，必须和 workflow 的 OpenSSL 参数对应 |
+| `internal/app/crypto.go` | 上传包加解密，必须和 workflow 的 OpenSSL 参数及文件格式对应 |
 | `internal/app/archive.go` | `tar.gz` 解包和路径逃逸防护 |
 | `internal/app/*_test.go` | 加解密兼容、上传解包、缓存下载和私密文件不暴露的测试 |
 | `Dockerfile` | 多阶段构建，builder 使用 Go，运行时使用 `scratch` |
@@ -52,10 +52,10 @@
 | 算法 | AES-256-CBC |
 | padding | PKCS#7 |
 | salt | 不使用，对应 `openssl enc -nosalt` |
-| IV | `EJwC9OfO/fkuTvPax7YHeQ==` |
+| 上传包格式 | 前 16 字节为随机 IV，后续内容为密文 |
 | key | `upload_secret` base64 解码后的 32 字节 |
 
-改动 `crypto.go` 或 workflow 加密命令时，必须保留 OpenSSL 固定密文测试。
+改动 `crypto.go` 或 workflow 加密命令时，必须保留 OpenSSL 样例密文测试，并覆盖上传包 IV 前缀解析。
 
 ## 验证命令
 

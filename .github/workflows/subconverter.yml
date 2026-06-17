@@ -1,7 +1,6 @@
 name: 更新订阅配置
 env:
   TZ: Asia/Shanghai
-  UPLOAD_AES_IV: EJwC9OfO/fkuTvPax7YHeQ==
 
 on:
   push:
@@ -163,8 +162,8 @@ jobs:
           tar -zcf ../config.tar.gz *
           cd ..
           echo 加密压缩包，
-          # iv和key都是base64字符串，先转成16进制再交给openssl，避免shell变量保存二进制数据，
-          iv="$UPLOAD_AES_IV"
+          # key是base64字符串，iv每次随机生成，转成16进制交给openssl，避免shell变量保存二进制数据，
+          iv=$(head -c 16 /dev/urandom |base64)
           #head -c 32 /dev/urandom |base64 > upload_secret
           if test -r $KEY_FILE
           then
@@ -176,7 +175,8 @@ jobs:
           fi
           key_hex=$(printf '%s' "$key" |base64 -d|od -A n -v -t x1 | tr -d ' \n')
           iv_hex=$(printf '%s' "$iv" |base64 -d|od -A n -v -t x1 | tr -d ' \n')
-          openssl enc -aes-256-cbc -K "$key_hex" -iv "$iv_hex" -nosalt <config.tar.gz >config.tar.gz.aes
+          printf '%s' "$iv" |base64 -d >config.tar.gz.aes
+          openssl enc -aes-256-cbc -K "$key_hex" -iv "$iv_hex" -nosalt <config.tar.gz >>config.tar.gz.aes
 
       - name: deploy config
         if: ${{ env.deploy == 'true' }}
@@ -205,10 +205,11 @@ jobs:
         run: |
           KEY_FILE=upload_secret
           key=$(tr -d '\r\n' < $KEY_FILE)
-          iv="$UPLOAD_AES_IV"
+          head -c 16 config.tar.gz.aes > upload.iv
+          tail -c +17 config.tar.gz.aes > config.tar.gz.ciphertext
           key_hex=$(printf '%s' "$key" |base64 -d|od -A n -v -t x1 | tr -d ' \n')
-          iv_hex=$(printf '%s' "$iv" |base64 -d|od -A n -v -t x1 | tr -d ' \n')
-          openssl enc -d -aes-256-cbc -K "$key_hex" -iv "$iv_hex" -nosalt <config.tar.gz.aes >config-decrypt.tar.gz
+          iv_hex=$(od -A n -v -t x1 upload.iv | tr -d ' \n')
+          openssl enc -d -aes-256-cbc -K "$key_hex" -iv "$iv_hex" -nosalt <config.tar.gz.ciphertext >config-decrypt.tar.gz
           mkdir -p config-decrypt
           tar -zxf config-decrypt.tar.gz -C config-decrypt
 
