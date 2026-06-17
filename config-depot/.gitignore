@@ -1,0 +1,34 @@
+# Go 构建产物
+/config-depot
+/bin/
+/dist/
+/build/
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+
+# Go 测试与覆盖率
+*.out
+coverage.*
+.coverprofile
+
+# 本地工具与编辑器
+.idea/
+.vscode/
+.DS_Store
+
+# 本地运行数据与密钥
+/data/
+/config/
+/upload_secret
+/upload_token
+/sub_secret
+/subscribe
+/deploy_url
+
+# 本地演练产物
+*.tar
+*.tar.gz
+*.tar.gz.aes

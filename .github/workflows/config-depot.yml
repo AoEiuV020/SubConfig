@@ -1,0 +1,41 @@
+name: config-depot CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "config-depot/**"
+      - ".github/workflows/config-depot.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "config-depot/**"
+      - ".github/workflows/config-depot.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: config-depot/go.mod
+
+      - name: test
+        working-directory: config-depot
+        run: go test ./...
+
+      - name: build
+        working-directory: config-depot
+        run: go build ./cmd/config-depot
+
+      - name: docker build
+        working-directory: config-depot
+        run: docker build -t config-depot:ci .

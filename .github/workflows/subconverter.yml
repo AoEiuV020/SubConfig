@@ -1,6 +1,7 @@
-name: CI
+name: 更新订阅配置
 env:
   TZ: Asia/Shanghai
+  UPLOAD_AES_IV: EJwC9OfO/fkuTvPax7YHeQ==
 
 on:
   push:
@@ -11,12 +12,16 @@ on:
     paths-ignore:
       - ".github/workflows/*"
       - "!.github/workflows/subconverter.yml"
+      - "config-depot/**"
+      - "README.md"
   pull_request:
     branches:
       - main
     paths-ignore:
       - ".github/workflows/*"
       - "!.github/workflows/subconverter.yml"
+      - "config-depot/**"
+      - "README.md"
   schedule:
     - cron: "0 */2 * * *"
   watch:
@@ -94,7 +99,7 @@ jobs:
           ./subconverter >/dev/null 2>&1 &
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: subconverter/_SubConfig
 
@@ -134,13 +139,13 @@ jobs:
           url=$(cat subscribe.json |jq -r 'to_entries|map(if (.value|(startswith("http")and(startswith("https://t.me/")|not))) then (.key|tostring|"sub/"+.) else .value end)|join("|")|@uri')
           echo 拼接自己需要的配置请求，
           mkdir -p config
-          for suffix in "" "-basic" "-break"
+          for suffix in "" "-basic" "-noban" "-ban"
           do
               for target in "clash" "quan" "v2ray" "ssr" "singbox"
               do
                   config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
                   code=$(curl -s -L -o config/$target$suffix -w '%{http_code}' "http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params")
-                  if [[ "$code" != 200 && -s config/$target$suffix ]]
+                  if [[ "$code" != 200 || ! -s config/$target$suffix ]]
                   then
                       echo 订阅转换异常，
                       wc config/$target$suffix
@@ -158,19 +163,20 @@ jobs:
           tar -zcf ../config.tar.gz *
           cd ..
           echo 加密压缩包，
-          # iv和key都是base64字符串，shell变量不能保存二进制数据，会破坏掉0,
-          #iv=$(head -c 16 /dev/urandom)
-          iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
+          # iv和key都是base64字符串，先转成16进制再交给openssl，避免shell变量保存二进制数据，
+          iv="$UPLOAD_AES_IV"
           #head -c 32 /dev/urandom |base64 > upload_secret
           if test -r $KEY_FILE
           then
-              key=$(cat $KEY_FILE)
+              key=$(tr -d '\r\n' < $KEY_FILE)
           else
               key=$(head -c 32 /dev/urandom |base64)
               echo generate random secret at $KEY_FILE
               echo $key > $KEY_FILE
           fi
-          openssl enc -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz >config.tar.gz.aes
+          key_hex=$(printf '%s' "$key" |base64 -d|od -A n -v -t x1 | tr -d ' \n')
+          iv_hex=$(printf '%s' "$iv" |base64 -d|od -A n -v -t x1 | tr -d ' \n')
+          openssl enc -aes-256-cbc -K "$key_hex" -iv "$iv_hex" -nosalt <config.tar.gz >config.tar.gz.aes
 
       - name: deploy config
         if: ${{ env.deploy == 'true' }}
@@ -181,7 +187,7 @@ jobs:
           #head -c 32 /dev/urandom |od -A n -v -t x1 | tr -d ' \n' > upload_token
           if test -r $TOKEN_FILE
           then
-              token=$(cat $TOKEN_FILE)
+              token=$(tr -d '\r\n' < $TOKEN_FILE)
           else
               token=$(head -c 32 /dev/urandom |od -A n -v -t x1 | tr -d ' \n')
               echo generate random token at $TOKEN_FILE
@@ -198,15 +204,17 @@ jobs:
         if: ${{ env.artifact == 'true' }}
         run: |
           KEY_FILE=upload_secret
-          key=$(cat $KEY_FILE)
-          iv=$(echo 'EJwC9OfO/fkuTvPax7YHeQ==')
-          openssl enc -d -aes-256-cbc -K "$(echo -n $key |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -iv "$(echo -n $iv |base64 -d|od -A n -v -t x1 | tr -d ' \n')" -nosalt <config.tar.gz.aes >config-decrypt.tar.gz
+          key=$(tr -d '\r\n' < $KEY_FILE)
+          iv="$UPLOAD_AES_IV"
+          key_hex=$(printf '%s' "$key" |base64 -d|od -A n -v -t x1 | tr -d ' \n')
+          iv_hex=$(printf '%s' "$iv" |base64 -d|od -A n -v -t x1 | tr -d ' \n')
+          openssl enc -d -aes-256-cbc -K "$key_hex" -iv "$iv_hex" -nosalt <config.tar.gz.aes >config-decrypt.tar.gz
           mkdir -p config-decrypt
           tar -zxf config-decrypt.tar.gz -C config-decrypt
 
       - name: upload config
         if: ${{ env.artifact == 'true' }}
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v4
         with:
           name: config
           path: config-decrypt/*
