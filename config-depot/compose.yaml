@@ -1,7 +1,6 @@
 services:
   config-depot:
-    build: .
-    image: config-depot:local
+    image: aoeiuv020/subconfig-config-depot:latest
     container_name: config-depot
     restart: unless-stopped
     ports:
