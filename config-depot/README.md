@@ -28,7 +28,13 @@ Docker Compose 运行：
 docker compose up -d --build
 ```
 
-compose 默认把本地 `./data` 绑定挂载到容器的 `/data`。容器以非 root 用户运行；正式部署时如果改成绑定原来的站点数据目录，例如 `/var/www/sub:/data`，需要先让容器用户可写该目录。
+compose 默认把本地 `./data` 绑定挂载到容器的 `/data`。容器默认以 root 运行，能够写入 root 拥有的挂载目录。需要让生成文件归属指定用户时，设置宿主机环境变量 `PUID` 和 `PGID`，Compose 会直接以该身份启动服务进程：
+
+```shell
+PUID=1000 PGID=1000 docker compose up -d
+```
+
+使用指定身份运行时，挂载到 `/data` 的宿主目录必须允许该身份写入。
 
 ## 环境变量
 
@@ -43,6 +49,8 @@ compose 默认把本地 `./data` 绑定挂载到容器的 `/data`。容器以非
 | `CONFIG_DEPOT_SUBSCRIBE_FILE` | `<data>/subscribe` | 订阅列表文件 |
 | `CONFIG_DEPOT_BACKEND_URL` | `https://subc.020.name/sub?` | 缓存未命中时使用的 subconverter 后端 |
 | `CONFIG_DEPOT_REMOTE_CONFIG_URL` | `https://github.com/AoEiuV020/SubConfig/raw/main/subconverter.ini` | 默认远程配置地址 |
+| `PUID` | `0` | Docker Compose 使用的进程用户 ID |
+| `PGID` | `0` | Docker Compose 使用的进程用户组 ID |
 
 ## 接口
 
