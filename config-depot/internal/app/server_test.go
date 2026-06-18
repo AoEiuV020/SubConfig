@@ -48,6 +48,34 @@ func TestUploadDecryptsAndExtractsConfigBundle(t *testing.T) {
 	assertFileContent(t, filepath.Join(dir, "config", "quan-basic"), "quan basic config")
 }
 
+func TestUploadReportsExtractFailureReason(t *testing.T) {
+	dir := testDataDir(t)
+	key := mustDecodeBase64(t, "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=")
+	writeFile(t, dir, "upload_secret", "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=\n")
+	writeFile(t, dir, "upload_token", "token-123\n")
+
+	server, err := NewServer(Settings{DataDir: dir})
+	if err != nil {
+		t.Fatalf("new server: %v", err)
+	}
+
+	encrypted, err := EncryptUploadBundle([]byte("不是有效的tar.gz内容"), key)
+	if err != nil {
+		t.Fatalf("encrypt bundle: %v", err)
+	}
+
+	request := multipartUploadRequest(t, "/upload", "token-123", encrypted)
+	response := httptest.NewRecorder()
+	server.ServeHTTP(response, request)
+
+	if response.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, body = %s", response.Code, response.Body.String())
+	}
+	if !strings.Contains(response.Body.String(), "解包配置失败：read gzip bundle") {
+		t.Fatalf("body = %q", response.Body.String())
+	}
+}
+
 func TestSubRedirectsWhenSecretDoesNotMatch(t *testing.T) {
 	dir := testDataDir(t)
 	writeFile(t, dir, "sub_secret", "secret\n")

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -62,56 +63,57 @@ func (server *Server) handleUpload(w http.ResponseWriter, r *http.Request) {
 
 	r.Body = http.MaxBytesReader(w, r.Body, maxUploadBytes)
 	if err := r.ParseMultipartForm(32 << 20); err != nil {
-		http.Error(w, "上传表单无效", http.StatusBadRequest)
+		uploadError(w, http.StatusBadRequest, "上传表单无效", err)
 		return
 	}
 
 	token, err := readRequiredTrimmedFile(server.settings.uploadToken)
 	if err != nil {
-		http.Error(w, "读取上传令牌失败", http.StatusInternalServerError)
+		uploadError(w, http.StatusInternalServerError, "读取上传令牌失败", err)
 		return
 	}
 	if r.PostFormValue("token") != token {
-		http.Error(w, "上传令牌错误", http.StatusBadRequest)
+		uploadError(w, http.StatusBadRequest, "上传令牌错误", nil)
 		return
 	}
 
 	file, header, err := r.FormFile("file")
 	if err != nil {
-		http.Error(w, "缺少上传文件", http.StatusBadRequest)
+		uploadError(w, http.StatusBadRequest, "缺少上传文件", err)
 		return
 	}
 	defer file.Close()
 	if header.Filename != "config.tar.gz.aes" {
-		http.Error(w, "上传文件名错误", http.StatusBadRequest)
+		uploadError(w, http.StatusBadRequest, "上传文件名错误", fmt.Errorf("收到文件名 %q", header.Filename))
 		return
 	}
 
 	raw, err := io.ReadAll(file)
 	if err != nil {
-		http.Error(w, "读取上传文件失败", http.StatusBadRequest)
+		uploadError(w, http.StatusBadRequest, "读取上传文件失败", err)
 		return
 	}
 
 	keyText, err := readRequiredTrimmedFile(server.settings.uploadSecret)
 	if err != nil {
-		http.Error(w, "读取上传密钥失败", http.StatusInternalServerError)
+		uploadError(w, http.StatusInternalServerError, "读取上传密钥失败", err)
 		return
 	}
 	key, err := DecodeBase64Secret(keyText)
 	if err != nil {
-		http.Error(w, "上传密钥格式无效", http.StatusInternalServerError)
+		uploadError(w, http.StatusInternalServerError, "上传密钥格式无效", err)
 		return
 	}
 	bundle, err := DecryptUploadBundle(raw, key)
 	if err != nil {
-		http.Error(w, "解密上传文件失败", http.StatusBadRequest)
+		uploadError(w, http.StatusBadRequest, "解密上传文件失败", err)
 		return
 	}
 	if err := ExtractConfigBundle(bundle, server.settings.configDir); err != nil {
-		http.Error(w, "解包配置失败", http.StatusBadRequest)
+		uploadError(w, http.StatusBadRequest, "解包配置失败", err)
 		return
 	}
+	log.Printf("上传配置成功：文件=%s 加密大小=%d 解密大小=%d 配置目录=%s", header.Filename, len(raw), len(bundle), server.settings.configDir)
 
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	_, _ = io.WriteString(w, "发布成功\n")
@@ -311,4 +313,14 @@ func validateSafePart(name string, value string) error {
 
 func methodNotAllowed(w http.ResponseWriter) {
 	http.Error(w, "方法不允许", http.StatusMethodNotAllowed)
+}
+
+func uploadError(w http.ResponseWriter, status int, message string, err error) {
+	if err != nil {
+		log.Printf("上传配置失败：%s：%v", message, err)
+		http.Error(w, fmt.Sprintf("%s：%v", message, err), status)
+		return
+	}
+	log.Printf("上传配置失败：%s", message)
+	http.Error(w, message, status)
 }
