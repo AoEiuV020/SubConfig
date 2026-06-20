@@ -3,6 +3,7 @@ set -euo pipefail
 
 RELEASE_FILE="${SUBCONVERTER_RELEASE_FILE:-release}"
 RELEASE_API="${SUBCONVERTER_RELEASE_API:-https://api.github.com/repos/MetaCubeX/subconverter/releases/latest}"
+DOWNLOAD_URL="${SUBCONVERTER_DOWNLOAD_URL:-}"
 ASSET_NAME="${SUBCONVERTER_ASSET_NAME:-subconverter_linux64.tar.gz}"
 ASSET_FILE="${SUBCONVERTER_ASSET_FILE:-$ASSET_NAME}"
 SUBCONVERTER_DIR="${SUBCONVERTER_DIR:-subconverter}"
@@ -27,17 +28,24 @@ if [[ -n "${GITHUB_TOKEN:-}" ]]; then
 fi
 
 echo 下载subconverter,
-code=$(curl -s -L -o "$RELEASE_FILE" -w '%{http_code}' "${curl_headers[@]}" "$RELEASE_API")
-if [[ "$code" != 200 ]]; then
-    echo api请求异常，
-    cat "$RELEASE_FILE"
-    exit 3
-fi
+if [[ -n "$DOWNLOAD_URL" ]]; then
+    download_url="$DOWNLOAD_URL"
+    echo 使用指定subconverter下载地址，
+else
+    code=$(curl -s -L -o "$RELEASE_FILE" -w '%{http_code}' ${curl_headers+"${curl_headers[@]}"} "$RELEASE_API")
+    if [[ "$code" != 200 ]]; then
+        echo api请求异常，
+        cat "$RELEASE_FILE"
+        exit 3
+    fi
 
-download_url=$(jq -r --arg name "$ASSET_NAME" '.assets[] | select(.name == $name).browser_download_url' "$RELEASE_FILE")
-if [[ -z "$download_url" || "$download_url" == "null" ]]; then
-    echo 未找到subconverter发布包: "$ASSET_NAME"
-    exit 3
+    tag_name=$(jq -r '.tag_name // .name // "unknown"' "$RELEASE_FILE")
+    echo subconverter发布版本: "$tag_name"
+    download_url=$(jq -r --arg name "$ASSET_NAME" '.assets[] | select(.name == $name).browser_download_url' "$RELEASE_FILE")
+    if [[ -z "$download_url" || "$download_url" == "null" ]]; then
+        echo 未找到subconverter发布包: "$ASSET_NAME"
+        exit 3
+    fi
 fi
 curl -s -L -o "$ASSET_FILE" "$download_url"
 rm -rf "$SUBCONVERTER_DIR"

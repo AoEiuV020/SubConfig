@@ -26,8 +26,11 @@ jq -srR 'split("\n") | map(select(length > 0))' "$SUBSCRIBE_FILE" >"$SUBSCRIBE_J
 echo 再下载节点列表，方便后面复用避免重复请求机场订阅，
 jq -r 'to_entries[] | select(.value | startswith("http") and (startswith("https://t.me/") | not)) | [.key, .value] | @tsv' "$SUBSCRIBE_JSON_FILE" |
 while IFS=$'\t' read -r index subscribe_url; do
-    echo fetching: "$index"
-    curl -s -L --fail -o "$SUBCONVERTER_SUB_DIR/$index" "$subscribe_url"
+    output_file="$SUBCONVERTER_SUB_DIR/$index"
+    echo 下载订阅: "$index"
+    curl -s -L --fail -o "$output_file" "$subscribe_url"
+    bytes=$(wc -c <"$output_file" | tr -d ' ')
+    echo 订阅缓存完成: "$index" "$bytes" 字节
 done
 
 echo 订阅转成本地请求，其他链接保留，

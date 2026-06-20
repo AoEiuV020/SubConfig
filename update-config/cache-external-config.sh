@@ -28,7 +28,9 @@ replace_url() {
     local to="$2"
     local escaped_from
     escaped_from=$(printf '%s' "$from" | sed 's/\//\\\//g')
-    sed_in_place "s/$escaped_from/$to/g" "$SUBCONFIG_DIR"/*.*
+    for file in "$SUBCONFIG_DIR"/*.*; do
+        sed_in_place "s/$escaped_from/$to/g" "$file"
+    done
 }
 
 echo 下载ACL4SSR，用的比较多的一个规则仓库，
