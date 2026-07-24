@@ -8,6 +8,7 @@ on:
       - "*"
     branches:
       - main
+      - "feat/**"
     paths-ignore:
       - ".github/workflows/*"
       - "!.github/workflows/subconverter.yml"
