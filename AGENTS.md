@@ -8,7 +8,7 @@ SubConfig 是一组 subconverter 外部配置，以及配套的 GitHub Actions �
 
 | 路径 | 职责 |
 |------|------|
-| `subconverter*.ini` | subconverter 使用的主配置，后缀代表不同配置变体 |
+| `subconverter*.toml` | subconverter 使用的主配置，后缀代表不同配置变体 |
 | `base_config.yml`、`base_quan.conf`、`base_singbox.json` | 不同客户端的基础配置模板 |
 | `*.list`、`surge_ruleset*.txt`、`custom_proxy_group*.txt` | 分流规则、代理组和规则列表 |
 | `exclude.ini`、`exclude.txt`、`rename.txt` | 订阅转换时使用的过滤和改名辅助配置 |

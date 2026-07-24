@@ -1,0 +1,117 @@
+[[custom_groups]]
+name = "🚀 节点选择"
+type = "select"
+rule = ["[]♻️ 实用选择", "[]🇭🇰 香港", "[]🇹🇼 台湾", "[]DIRECT", ".*"]
+
+[[custom_groups]]
+name = "♻️ 实用选择"
+type = "select"
+rule = ["[]⚖️ 负载均衡", "[]🔯 主机场", "[]🔯 备用", "[]🔯 备备用", "!!GROUPID=0!!懒人节点.*01", "!!GROUPID=0!!美国.*01", "!!GROUPID=1!!日本.*01"]
+
+[[custom_groups]]
+name = "🔯 主机场"
+type = "select"
+rule = ["!!GROUPID=0!!港", "!!GROUPID=0!!台", "!!GROUPID=0!!新", "!!GROUPID=0!!美", "!!GROUPID=0!!日", "!!GROUPID=0"]
+
+[[custom_groups]]
+name = "🔯 备用"
+type = "select"
+rule = ["!!GROUPID=1!!x0.1x", "!!GROUPID=1!!x0.5x", "!!GROUPID=1!!港", "!!GROUPID=1!!台", "!!GROUPID=1!!新", "!!GROUPID=1!!美", "!!GROUPID=1!!日", "!!GROUPID=1"]
+
+[[custom_groups]]
+name = "🔯 备备用"
+type = "select"
+rule = ["!!GROUPID=2"]
+
+[[custom_groups]]
+name = "🐟 漏网之鱼"
+type = "select"
+rule = ["[]🚀 节点选择", "[]⚖️ 负载均衡", "[]🎯 全球直连"]
+
+[[custom_groups]]
+name = "📺 哔哩哔哩"
+type = "select"
+rule = ["[]🎯 全球直连", "[]🚀 节点选择", "[]🇭🇰 香港", "[]🇹🇼 台湾", "(广台|彰化|新北|TW|台|港|广港|香港|HK)"]
+
+[[custom_groups]]
+name = "Ⓜ️ 微软服务"
+type = "select"
+rule = ["[]🎯 全球直连", "[]🚀 节点选择", "[]🔯 主机场", "[]🔯 备用", "[]🔯 备备用", ".*"]
+
+[[custom_groups]]
+name = "🔍 谷歌CN"
+type = "select"
+rule = ["[]🎯 全球直连", "[]🚀 节点选择", ".*"]
+
+[[custom_groups]]
+name = "🎯 全球直连"
+type = "select"
+rule = ["[]DIRECT", "[]🚀 节点选择", "国内"]
+
+[[custom_groups]]
+name = "🐙 GITHUB"
+type = "select"
+rule = ["[]🚀 节点选择", "[]🔯 主机场", "[]🔯 备用", "[]🔯 备备用", "[]🎯 全球直连", "懒人节点", ".*"]
+
+[[custom_groups]]
+name = "🤖 OpenAI"
+type = "select"
+rule = ["[]🚀 节点选择", "[]🔯 主机场", "[]🔯 备用", "[]🔯 备备用", "[]🎯 全球直连", "GPT", ".*"]
+
+[[custom_groups]]
+name = "🤖 Gemini"
+type = "select"
+rule = ["[]🚀 节点选择", "[]🔯 主机场", "[]🔯 备用", "[]🔯 备备用", "[]🎯 全球直连", "新加坡", "美国", ".*"]
+
+[[custom_groups]]
+name = "🖼️ Imgur"
+type = "select"
+rule = ["[]🚀 节点选择", "[]🔯 主机场", "[]🔯 备用", "[]🔯 备备用", "[]🎯 全球直连", "懒人节点", ".*"]
+
+[[custom_groups]]
+name = "🐉 巴哈姆特"
+type = "select"
+rule = ["[]🎯 全球直连", "[]🚀 节点选择", "[]🇹🇼 台湾", "(广台|彰化|新北|TW|台)"]
+
+[[custom_groups]]
+name = "🎬 EMBY"
+type = "select"
+rule = ["[]🚀 节点选择", "Emby", "emby", "EMBY", ".*"]
+
+[[custom_groups]]
+name = "📹 YouTube"
+type = "select"
+rule = ["[]🚀 节点选择", "[]🔯 主机场", "[]🔯 备用", "[]🔯 备备用", ".*"]
+
+[[custom_groups]]
+name = "🎥 奈飞视频"
+type = "select"
+rule = ["[]🚀 节点选择", "NF", "解锁", "原生", ".*"]
+
+[[custom_groups]]
+name = "🛑 全球拦截"
+type = "select"
+rule = ["[]REJECT", "[]🎯 全球直连", "[]🚀 节点选择"]
+
+[[custom_groups]]
+name = "🏠 HOME"
+type = "select"
+rule = ["[]DIRECT", "[]🎯 全球直连", "[]🚀 节点选择", "国内"]
+
+[[custom_groups]]
+name = "🇭🇰 香港"
+type = "select"
+rule = ["港|香港|HK|AZ|AWS|Azure"]
+
+[[custom_groups]]
+name = "🇹🇼 台湾"
+type = "select"
+rule = ["彰化|新北|台|Hinet|TW"]
+
+[[custom_groups]]
+name = "⚖️ 负载均衡"
+type = "load-balance"
+rule = ["!!GROUPID=0!!港"]
+url = "http://www.gstatic.com/generate_204"
+interval = 300
+strategy = "round-robin"

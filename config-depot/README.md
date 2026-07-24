@@ -48,7 +48,7 @@ PUID=1000 PGID=1000 docker compose up -d
 | `CONFIG_DEPOT_SUB_SECRET_FILE` | `<data>/sub_secret` | 订阅密钥文件 |
 | `CONFIG_DEPOT_SUBSCRIBE_FILE` | `<data>/subscribe` | 订阅列表文件 |
 | `CONFIG_DEPOT_BACKEND_URL` | `https://subc.020.name/sub?` | 缓存未命中时使用的 subconverter 后端 |
-| `CONFIG_DEPOT_REMOTE_CONFIG_URL` | `https://github.com/AoEiuV020/SubConfig/raw/main/subconverter.ini` | 默认远程配置地址 |
+| `CONFIG_DEPOT_REMOTE_CONFIG_URL` | `https://github.com/AoEiuV020/SubConfig/raw/main/subconverter.toml` | 默认远程配置地址 |
 | `PUID` | `0` | Docker Compose 使用的进程用户 ID |
 | `PGID` | `0` | Docker Compose 使用的进程用户组 ID |
 

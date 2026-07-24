@@ -6,7 +6,7 @@ SUBSCRIBE_JSON_FILE="${SUBSCRIBE_JSON_FILE:-subscribe.json}"
 SUBCONVERTER_DIR="${SUBCONVERTER_DIR:-subconverter}"
 SUBCONVERTER_SUB_DIR="${SUBCONVERTER_SUB_DIR:-$SUBCONVERTER_DIR/sub}"
 CONFIG_OUTPUT_DIR="${CONFIG_OUTPUT_DIR:-config}"
-DEFAULT_CONFIG="${DEFAULT_CONFIG:-_SubConfig/subconverter.ini}"
+DEFAULT_CONFIG="${DEFAULT_CONFIG:-_SubConfig/subconverter.toml}"
 SUBCONVERTER_URL="${SUBCONVERTER_URL:-http://127.0.0.1:25500/sub}"
 SUBCONVERTER_PARAMS="${SUBCONVERTER_PARAMS:-emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true}"
 CONFIG_SUFFIXES="${CONFIG_SUFFIXES:---default--}"
@@ -40,7 +40,7 @@ echo 拼接自己需要的配置请求，
 mkdir -p "$CONFIG_OUTPUT_DIR"
 for suffix in "${config_suffixes[@]}"; do
     for target in "${config_targets[@]}"; do
-        config_path="${DEFAULT_CONFIG/%.ini/${suffix}.ini}"
+        config_path="${DEFAULT_CONFIG/%.toml/${suffix}.toml}"
         config=$(printf '%s' "$config_path" | jq -rR @uri)
         output_file="$CONFIG_OUTPUT_DIR/$target$suffix"
         code=$(curl -s -L -o "$output_file" -w '%{http_code}' "$SUBCONVERTER_URL?target=$target&url=$url&config=$config&$SUBCONVERTER_PARAMS")

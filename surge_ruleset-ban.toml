@@ -1,0 +1,8 @@
+[[rulesets]]
+import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset-first.txt"
+
+[[rulesets]]
+import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset-ban.txt"
+
+[[rulesets]]
+import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset.txt"

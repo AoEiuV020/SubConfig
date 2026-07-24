@@ -8,7 +8,7 @@ services:
     environment:
       CONFIG_DEPOT_ADDR: ":8080"
       CONFIG_DEPOT_BACKEND_URL: "https://subc.020.name/sub?"
-      CONFIG_DEPOT_REMOTE_CONFIG_URL: "https://github.com/AoEiuV020/SubConfig/raw/main/subconverter.ini"
+      CONFIG_DEPOT_REMOTE_CONFIG_URL: "https://github.com/AoEiuV020/SubConfig/raw/main/subconverter.toml"
     user: "${PUID:-0}:${PGID:-0}"
     volumes:
       - ./data:/data

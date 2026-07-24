@@ -93,7 +93,7 @@ jobs:
       - name: update config
         run: |
           SUBSCRIBE_FILE=subscribe
-          default_config="_SubConfig/subconverter.ini"
+          default_config="_SubConfig/subconverter.toml"
           params="emoji=true&list=false&udp=true&tfo=false&scv=false&fdn=false&sort=false&new_name=true"
           mkdir -p subconverter/sub
           echo 先整理出订阅数组，
@@ -108,7 +108,7 @@ jobs:
           do
               for target in "clash" "quan" "v2ray" "ssr"
               do
-                  config=$(echo ${default_config/%.ini/${suffix}.ini} |jq -rR @uri)
+                  config=$(echo ${default_config/%.toml/${suffix}.toml} |jq -rR @uri)
                   echo "curl -s -L -o config/$target$suffix -w '%{http_code}' \"http://127.0.0.1:25500/sub?target=$target&url=$url&config=$config&$params\"" >> update.sh
               done
           done
