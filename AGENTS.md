@@ -10,8 +10,9 @@ SubConfig 是一组 subconverter 外部配置，以及配套的 GitHub Actions �
 |------|------|
 | `subconverter*.toml` | subconverter 使用的主配置，后缀代表不同配置变体 |
 | `base_config.yml`、`base_quan.conf`、`base_singbox.json` | 不同客户端的基础配置模板 |
-| `*.list`、`surge_ruleset*.txt`、`custom_proxy_group*.txt` | 分流规则、代理组和规则列表 |
-| `exclude.ini`、`exclude.txt`、`rename.txt` | 订阅转换时使用的过滤和改名辅助配置 |
+| `*.list` | 分流规则列表 |
+| `surge_ruleset*.toml`、`custom_proxy_group*.toml`、`rename.toml` | TOML 格式的规则集、代理组和重命名配置 |
+| `exclude.ini`、`exclude.txt` | 订阅转换时使用的过滤辅助配置 |
 | `.github/workflows/subconverter.yml` | 自动运行 subconverter，生成、加密、上传订阅配置 |
 | `.github/workflows/config-depot.yml` | 只验证 `config-depot` Go 项目 |
 | `.github/workflows/debugger.yml` | 手动调试订阅更新流程 |
