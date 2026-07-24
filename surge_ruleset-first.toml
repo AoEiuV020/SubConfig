@@ -1,2 +1,15 @@
 [[rulesets]]
-import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset-first.txt"
+group = "DIRECT"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/direct.list"
+
+[[rulesets]]
+group = "🏠 HOME"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/home.list"
+
+[[rulesets]]
+group = "DIRECT"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/LocalAreaNetwork.list"
+
+[[rulesets]]
+group = "🚀 节点选择"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/proxy.list"

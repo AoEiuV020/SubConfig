@@ -1,0 +1,39 @@
+[[custom_groups]]
+name = "🚀 节点选择"
+type = "select"
+rule = ["[]🔯 主机场", "[]🔯 备用", "[]🔯 备备用", "[]DIRECT", ".*"]
+
+[[custom_groups]]
+name = "🔯 主机场"
+type = "select"
+rule = ["select", "!!GROUPID=0!!港.*x0.5x", "!!GROUPID=0!!港", "!!GROUPID=0!!台", "!!GROUPID=0!!新", "!!GROUPID=0!!美", "!!GROUPID=0!!日", "!!GROUPID=0"]
+
+[[custom_groups]]
+name = "🔯 备用"
+type = "select"
+rule = ["select", "!!GROUPID=1"]
+
+[[custom_groups]]
+name = "🔯 备备用"
+type = "select"
+rule = ["select", "!!GROUPID=2"]
+
+[[custom_groups]]
+name = "🎯 全球直连"
+type = "select"
+rule = ["[]DIRECT", "[]🚀 节点选择", "国内"]
+
+[[custom_groups]]
+name = "🐙 GITHUB"
+type = "select"
+rule = ["[]🚀 节点选择", "[]🎯 全球直连", "懒人节点", ".*"]
+
+[[custom_groups]]
+name = "🐟 漏网之鱼"
+type = "select"
+rule = ["[]🚀 节点选择", "[]🎯 全球直连"]
+
+[[custom_groups]]
+name = "🏠 HOME"
+type = "select"
+rule = ["[]DIRECT", "[]🎯 全球直连", "[]🚀 节点选择", "国内"]

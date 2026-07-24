@@ -1,0 +1,79 @@
+[[rename_node]]
+match = '\(?((x|X)?(\d+)(\.?\d+)?)((\s?倍率?)|(x|X))\)?'
+replace = 'x$1x'
+
+[[rename_node]]
+match = '\*'
+replace = ' 原生'
+
+[[rename_node]]
+match = '\^'
+replace = ' 解锁'
+
+[[rename_node]]
+match = '\!'
+replace = ' UDP'
+
+[[rename_node]]
+match = '\+'
+replace = ' EMBY'
+
+[[rename_node]]
+match = '\$'
+replace = ' x10x'
+
+[[rename_node]]
+match = '\#'
+replace = ' x2x'
+
+[[rename_node]]
+match = '!!GROUPID=0!!^'
+replace = 'A·'
+
+[[rename_node]]
+match = '!!GROUPID=1!!^'
+replace = 'B·'
+
+[[rename_node]]
+match = '!!GROUPID=2!!^'
+replace = 'C·'
+
+[[rename_node]]
+match = 'HK'
+replace = '香港'
+
+[[rename_node]]
+match = 'HKG'
+replace = '香港'
+
+[[rename_node]]
+match = 'TP'
+replace = '台湾'
+
+[[rename_node]]
+match = 'SG'
+replace = '新加坡'
+
+[[rename_node]]
+match = 'JP'
+replace = '日本'
+
+[[rename_node]]
+match = 'Hong Kong'
+replace = '香港'
+
+[[rename_node]]
+match = 'Taiwan'
+replace = '台湾'
+
+[[rename_node]]
+match = 'United States'
+replace = '美国'
+
+[[rename_node]]
+match = 'Singapore'
+replace = '新加坡'
+
+[[rename_node]]
+match = '狮城'
+replace = '新加坡'

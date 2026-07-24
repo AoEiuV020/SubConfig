@@ -1,5 +1,91 @@
 [[rulesets]]
-import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset-first.txt"
+group = "🔍 谷歌CN"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/GoogleCN.list"
 
 [[rulesets]]
-import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset.txt"
+group = "🚀 节点选择"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/steam-proxy.list"
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/steam-direct.list"
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/ubisoft-direct.list"
+
+[[rulesets]]
+group = "🐙 GITHUB"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/github.list"
+
+[[rulesets]]
+group = "🤖 OpenAI"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/openAi.list"
+
+[[rulesets]]
+group = "🤖 Gemini"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/gemini.list"
+
+[[rulesets]]
+group = "🖼️ Imgur"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/imgur.list"
+
+[[rulesets]]
+group = "📹 YouTube"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/YouTube.list"
+
+[[rulesets]]
+group = "🎬 EMBY"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/emby.list"
+
+[[rulesets]]
+group = "🎥 奈飞视频"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Netflix.list"
+
+[[rulesets]]
+group = "Ⓜ️ 微软服务"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Microsoft.list"
+
+[[rulesets]]
+group = "Ⓜ️ 微软服务"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Xbox.list"
+
+[[rulesets]]
+group = "📺 哔哩哔哩"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Bilibili.list"
+
+[[rulesets]]
+group = "📺 哔哩哔哩"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/BilibiliHMT.list"
+
+[[rulesets]]
+group = "🐉 巴哈姆特"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/Bahamut.list"
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/ChinaDomain.list"
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Download.list"
+
+[[rulesets]]
+group = "🚀 节点选择"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/ProxyLite.list"
+
+[[rulesets]]
+group = "🎯 全球直连"
+ruleset = "[]GEOIP,CN"
+
+[[rulesets]]
+group = "🏠 HOME"
+ruleset = "https://github.com/AoEiuV020/SubConfig/raw/main/home.list"
+
+[[rulesets]]
+group = "DIRECT"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/LocalAreaNetwork.list"
+
+[[rulesets]]
+group = "🐟 漏网之鱼"
+ruleset = "[]FINAL"

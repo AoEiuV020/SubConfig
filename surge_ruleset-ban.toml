@@ -1,8 +1,11 @@
 [[rulesets]]
-import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset-first.txt"
+group = "🎯 全球直连"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/UnBan.list"
 
 [[rulesets]]
-import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset-ban.txt"
+group = "🛑 全球拦截"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/BanAD.list"
 
 [[rulesets]]
-import = "https://github.com/AoEiuV020/SubConfig/raw/main/surge_ruleset.txt"
+group = "🛑 全球拦截"
+ruleset = "https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/BanProgramAD.list"
