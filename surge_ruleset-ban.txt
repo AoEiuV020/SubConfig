@@ -1,3 +1,0 @@
-🎯 全球直连,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/UnBan.list
-🛑 全球拦截,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/BanAD.list
-🛑 全球拦截,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/BanProgramAD.list
