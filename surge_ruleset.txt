@@ -1,5 +1,5 @@
-🔍 谷歌CN,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/GoogleCN.list
 🔍 谷歌CN,https://github.com/AoEiuV020/SubConfig/raw/main/googleCn.list
+🔍 谷歌CN,https://github.com/ACL4SSR/ACL4SSR/raw/master/Clash/Ruleset/GoogleCN.list
 🚀 节点选择,https://github.com/AoEiuV020/SubConfig/raw/main/steam-proxy.list
 🎯 全球直连,https://github.com/AoEiuV020/SubConfig/raw/main/steam-direct.list
 🎯 全球直连,https://github.com/AoEiuV020/SubConfig/raw/main/ubisoft-direct.list
