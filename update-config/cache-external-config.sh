@@ -4,11 +4,16 @@ set -euo pipefail
 SUBCONVERTER_DIR="${SUBCONVERTER_DIR:-subconverter}"
 SUBCONVERTER_BASE_PATH="${SUBCONVERTER_BASE_PATH:-_SubConfig}"
 ACL4SSR_BASE_PATH="${ACL4SSR_BASE_PATH:-_ACL4SSR}"
+META_RULES_DAT_BASE_PATH="${META_RULES_DAT_BASE_PATH:-_meta-rules-dat}"
 SUBCONFIG_DIR="${SUBCONFIG_DIR:-$SUBCONVERTER_DIR/$SUBCONVERTER_BASE_PATH}"
 ACL4SSR_DIR="${ACL4SSR_DIR:-$SUBCONVERTER_DIR/$ACL4SSR_BASE_PATH}"
+META_RULES_DAT_DIR="${META_RULES_DAT_DIR:-$SUBCONVERTER_DIR/$META_RULES_DAT_BASE_PATH}"
 ACL4SSR_ARCHIVE="${ACL4SSR_ARCHIVE:-ACL4SSR.tar.gz}"
 ACL4SSR_ARCHIVE_URL="${ACL4SSR_ARCHIVE_URL:-https://github.com/ACL4SSR/ACL4SSR/archive/refs/heads/master.tar.gz}"
 ACL4SSR_EXTRACTED_DIR="${ACL4SSR_EXTRACTED_DIR:-ACL4SSR-master}"
+META_RULES_DAT_ARCHIVE="${META_RULES_DAT_ARCHIVE:-meta-rules-dat.tar.gz}"
+META_RULES_DAT_ARCHIVE_URL="${META_RULES_DAT_ARCHIVE_URL:-https://github.com/MetaCubeX/meta-rules-dat/archive/refs/heads/meta.tar.gz}"
+META_RULES_DAT_EXTRACTED_DIR="${META_RULES_DAT_EXTRACTED_DIR:-meta-rules-dat-meta}"
 SUBCONFIG_REPOSITORY="${SUBCONFIG_REPOSITORY:-${GITHUB_REPOSITORY:-AoEiuV020/SubConfig}}"
 default_ref="${GITHUB_REF:-refs/heads/main}"
 branch="${SUBCONFIG_BRANCH:-${default_ref#refs/heads/}}"
@@ -33,14 +38,27 @@ replace_url() {
     done
 }
 
-echo 下载ACL4SSR，用的比较多的一个规则仓库，
-curl -s -L -o "$ACL4SSR_ARCHIVE" "$ACL4SSR_ARCHIVE_URL"
-acl_extract_parent=$(dirname "$ACL4SSR_DIR")
-rm -rf "$acl_extract_parent/$ACL4SSR_EXTRACTED_DIR"
-tar -zxf "$ACL4SSR_ARCHIVE" -C "$acl_extract_parent"
-rm -rf "$ACL4SSR_DIR"
-mv "$acl_extract_parent/$ACL4SSR_EXTRACTED_DIR" "$ACL4SSR_DIR"
+cache_repository() {
+    local name="$1"
+    local archive="$2"
+    local archive_url="$3"
+    local target_dir="$4"
+    local extracted_dir="$5"
+    local extract_parent
+
+    echo "下载${name}规则仓库"
+    curl -s -L -o "$archive" "$archive_url"
+    extract_parent=$(dirname "$target_dir")
+    rm -rf "$extract_parent/$extracted_dir"
+    tar -zxf "$archive" -C "$extract_parent"
+    rm -rf "$target_dir"
+    mv "$extract_parent/$extracted_dir" "$target_dir"
+}
+
+cache_repository "ACL4SSR" "$ACL4SSR_ARCHIVE" "$ACL4SSR_ARCHIVE_URL" "$ACL4SSR_DIR" "$ACL4SSR_EXTRACTED_DIR"
+cache_repository "meta-rules-dat" "$META_RULES_DAT_ARCHIVE" "$META_RULES_DAT_ARCHIVE_URL" "$META_RULES_DAT_DIR" "$META_RULES_DAT_EXTRACTED_DIR"
 
 echo 替换配置文件, 包含以上仓库的地址，改成本地地址以加速，
 replace_url "https://github.com/$SUBCONFIG_REPOSITORY/raw/$branch" "$SUBCONVERTER_BASE_PATH"
 replace_url "https://github.com/ACL4SSR/ACL4SSR/raw/master" "$ACL4SSR_BASE_PATH"
+replace_url "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta" "$META_RULES_DAT_BASE_PATH"

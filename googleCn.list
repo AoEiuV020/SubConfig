@@ -1,3 +1,2 @@
-DOMAIN-SUFFIX,google.cn
+# Android 设备上的 Google Play 商店会访问 googleapis.cn。
 DOMAIN-SUFFIX,googleapis.cn
-

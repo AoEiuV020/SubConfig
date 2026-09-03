@@ -13,7 +13,7 @@
 | `install-dependencies.sh` | CI 安装 `jq`、`curl`、`tar`、`gzip`、`openssl` |
 | `prepare.sh` | 把外部传入的密钥、上传地址和订阅内容写成流程输入文件 |
 | `run-subconverter.sh` | 下载并启动 subconverter，调整 `base_path` |
-| `cache-external-config.sh` | 下载 ACL4SSR，并把远程规则地址替换成本地缓存路径 |
+| `cache-external-config.sh` | 下载 ACL4SSR 和 meta-rules-dat，并把远程规则地址替换成本地缓存路径 |
 | `update-config.sh` | 读取订阅列表，生成各 target 和 suffix 的配置文件 |
 | `compress-config.sh` | 打包并按 config-depot 兼容格式加密 `config.tar.gz.aes` |
 | `deploy-config.sh` | 调用 config-depot `/upload` 上传加密配置包 |
