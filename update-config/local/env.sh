@@ -69,7 +69,7 @@ export CONFIG_DEPOT_PID_FILE
 export SUBCONVERTER_URL
 export SUBCONVERTER_HEALTH_URL
 
-if [[ -r "$GITHUB_TOKEN_FILE" ]]; then
+if [[ -z "${GITHUB_TOKEN:-}" && -r "$GITHUB_TOKEN_FILE" ]]; then
     GITHUB_TOKEN=$(tr -d '\r\n' <"$GITHUB_TOKEN_FILE")
     export GITHUB_TOKEN
 fi
