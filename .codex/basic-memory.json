@@ -1,0 +1,18 @@
+{
+  "basicMemory": {
+    "primaryProject": "SubConfig",
+    "secondaryProjects": [],
+    "projectMode": "local",
+    "teamProjects": {},
+    "focus": "code/dev",
+    "sessionProfile": "coding",
+    "repository": "AoEiuV020/SubConfig",
+    "captureFolder": "sessions",
+    "rememberFolder": "bm-remember",
+    "recallTimeframe": "3d",
+    "preCompactCapture": "extractive",
+    "checkpointOnCompact": true,
+    "captureEvents": true,
+    "placementConventions": "设计/ 存业务规则、流程契约、领域约束；工程/ 存技术栈、模块结构、源码入口、依赖、构建测试；参考/ 存外部 API/SDK/协议/第三方资料。"
+  }
+}
