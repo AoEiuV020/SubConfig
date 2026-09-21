@@ -1,3 +1,7 @@
-subconverter*
-subscribe
-release
+/subconverter/
+/subconverter_*.tar.gz
+/subconverter_*.7z
+/subconverter.log
+/subconverter.pid
+/subscribe
+/release
