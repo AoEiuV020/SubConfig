@@ -8,7 +8,7 @@ SUBCONVERTER_SUB_DIR="${SUBCONVERTER_SUB_DIR:-$SUBCONVERTER_DIR/sub}"
 CONFIG_OUTPUT_DIR="${CONFIG_OUTPUT_DIR:-config}"
 DEFAULT_CONFIG="${DEFAULT_CONFIG:-_SubConfig/subconverter.ini}"
 SUBCONVERTER_URL="${SUBCONVERTER_URL:-http://127.0.0.1:25500/sub}"
-SUBCONVERTER_PARAMS="${SUBCONVERTER_PARAMS:-emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false&new_name=true}"
+SUBCONVERTER_PARAMS="${SUBCONVERTER_PARAMS:-emoji=true&list=false&fdn=false&sort=false&new_name=true}"
 CONFIG_SUFFIXES="${CONFIG_SUFFIXES:---default--}"
 CONFIG_TARGETS="${CONFIG_TARGETS:-clash quan v2ray ssr singbox}"
 
