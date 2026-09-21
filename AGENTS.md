@@ -2,7 +2,9 @@
 
 ## 项目定位
 
-SubConfig 是一组 subconverter 外部配置，以及配套的 GitHub Actions 自动更新流程。仓库根目录主要维护静态配置文件；`config-depot/` 是独立的 Go 服务，用来接收 Actions 生成的加密配置包并提供下载。
+SubConfig 的核心产物是 `subconverter*.ini` 及其引用的规则文件。任何 subconverter 实例都可以通过 `config` 参数直接引用这组配置，无需本仓库的其他部分参与。
+
+在此基础上，仓库用 GitHub Actions 按这组配置转换作者自己的机场订阅，并由独立的 Go 服务 `config-depot/` 接收加密配置包、提供下载。自动化流程是这组配置的一种使用方式，不是配置生效的前提。
 
 ## 项目地图
 
@@ -21,6 +23,8 @@ SubConfig 是一组 subconverter 外部配置，以及配套的 GitHub Actions �
 
 ## 工作边界
 
+- 规则必须自包含在外部配置中，不得改为依赖 subconverter 部署环境的 `pref.ini` 或其他全局设置，否则外部引用者拿不到完整行为。
+- `exclude_remarks` 不支持 `!!import`，只能在每个配置变体中直接写正则；同一条排除规则在多个文件中重复维护是上述两项约束的结果，不是待清理的冗余。
 - 根目录配置文件和 `subconverter.yml` 属于订阅生成流程。
 - 订阅生成客户端脚本放在 `update-config/`，workflow 只调用脚本，不内联业务逻辑。
 - `config-depot/` 属于发布服务，和订阅生成 workflow 分开维护。
