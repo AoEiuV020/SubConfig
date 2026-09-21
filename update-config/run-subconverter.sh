@@ -4,8 +4,8 @@ set -euo pipefail
 RELEASE_FILE="${SUBCONVERTER_RELEASE_FILE:-release}"
 RELEASE_API="${SUBCONVERTER_RELEASE_API:-https://api.github.com/repos/MetaCubeX/subconverter/releases/latest}"
 DOWNLOAD_URL="${SUBCONVERTER_DOWNLOAD_URL:-}"
-ASSET_NAME="${SUBCONVERTER_ASSET_NAME:-subconverter_linux64.tar.gz}"
-ASSET_FILE="${SUBCONVERTER_ASSET_FILE:-$ASSET_NAME}"
+ASSET_NAME="${SUBCONVERTER_ASSET_NAME:-}"
+ASSET_FILE="${SUBCONVERTER_ASSET_FILE:-}"
 SUBCONVERTER_DIR="${SUBCONVERTER_DIR:-subconverter}"
 SUBCONVERTER_LOG_FILE="${SUBCONVERTER_LOG_FILE:-../subconverter.log}"
 SUBCONVERTER_PID_FILE="${SUBCONVERTER_PID_FILE:-../subconverter.pid}"
@@ -21,6 +21,22 @@ sed_in_place() {
         sed -i '' "$expression" "$file"
     fi
 }
+
+if [[ -z "$ASSET_NAME" ]]; then
+    case "$(uname -s)-$(uname -m)" in
+        Darwin-arm64) ASSET_NAME=subconverter_darwinarm.tar.gz ;;
+        Darwin-x86_64) ASSET_NAME=subconverter_darwin64.tar.gz ;;
+        Linux-aarch64 | Linux-arm64) ASSET_NAME=subconverter_aarch64.tar.gz ;;
+        Linux-armv6* | Linux-armv7*) ASSET_NAME=subconverter_armv7.tar.gz ;;
+        Linux-i386 | Linux-i686) ASSET_NAME=subconverter_linux32.tar.gz ;;
+        Linux-x86_64 | Linux-amd64) ASSET_NAME=subconverter_linux64.tar.gz ;;
+        *)
+            echo 当前系统没有对应的subconverter发布包，请通过SUBCONVERTER_ASSET_NAME指定，
+            exit 3
+            ;;
+    esac
+fi
+ASSET_FILE="${ASSET_FILE:-$ASSET_NAME}"
 
 curl_headers=()
 if [[ -n "${GITHUB_TOKEN:-}" ]]; then

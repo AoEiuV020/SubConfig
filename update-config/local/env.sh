@@ -36,19 +36,6 @@ CONFIG_DEPOT_PID_FILE="${CONFIG_DEPOT_PID_FILE:-$WORK_DIR/config-depot.pid}"
 SUBCONVERTER_URL="${SUBCONVERTER_URL:-http://127.0.0.1:25500/sub}"
 SUBCONVERTER_HEALTH_URL="${SUBCONVERTER_HEALTH_URL:-http://127.0.0.1:25500/version}"
 
-if [[ -z "${SUBCONVERTER_ASSET_NAME:-}" ]]; then
-    case "$(uname -s)-$(uname -m)" in
-        Darwin-arm64) SUBCONVERTER_ASSET_NAME="subconverter_darwinarm.tar.gz" ;;
-        Darwin-*) SUBCONVERTER_ASSET_NAME="subconverter_darwin64.tar.gz" ;;
-        Linux-aarch64 | Linux-arm64) SUBCONVERTER_ASSET_NAME="subconverter_aarch64.tar.gz" ;;
-        Linux-*) SUBCONVERTER_ASSET_NAME="subconverter_linux64.tar.gz" ;;
-        *)
-            echo 不支持自动选择subconverter包，请通过SUBCONVERTER_ASSET_NAME指定，
-            exit 9
-            ;;
-    esac
-fi
-
 export ROOT_DIR
 export WORK_DIR
 export CONFIG_DEPOT_BINARY
@@ -81,7 +68,6 @@ export CONFIG_DEPOT_LOG_FILE
 export CONFIG_DEPOT_PID_FILE
 export SUBCONVERTER_URL
 export SUBCONVERTER_HEALTH_URL
-export SUBCONVERTER_ASSET_NAME
 
 if [[ -r "$GITHUB_TOKEN_FILE" ]]; then
     GITHUB_TOKEN=$(tr -d '\r\n' <"$GITHUB_TOKEN_FILE")
