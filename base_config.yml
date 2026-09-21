@@ -204,6 +204,9 @@ dns:
     - 114.114.114.114
     - 119.29.29.29
     - 223.5.5.5
+  proxy-server-nameserver: # 节点服务器域名专用，绕开fallback，境外节点域名不会因为要先走代理查询境外dns而解析失败，
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
   fallback-filter:
     geoip: true
     geoip-code: CN
